@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react"
 
-import '@/css/globals.css'
-import { ThemeProvider } from '@/components/context/theme-provider'
+import "@/css/globals.css"
+import { ThemeProvider } from "@/components/context/theme-provider"
 
 interface RootLayoutProps {
   children: React.ReactNode
