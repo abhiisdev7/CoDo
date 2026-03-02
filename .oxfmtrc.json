@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "/components/ui",
+    "/bun.lock",
+    "/.next"
+  ],
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "semi": false,
+  "insertFinalNewline": true
+}
