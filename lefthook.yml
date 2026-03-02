@@ -1,0 +1,27 @@
+# Lefthook hooks for CoDo (Next.js + ESLint + oxfmt)
+# https://lefthook.dev/configuration/
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs}"
+      exclude:
+        - "components/ui/**"
+      run: bunx eslint {staged_files}
+
+    - name: format check
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,json}"
+      exclude:
+        - "components/ui/**"
+        - "bun.lock"
+        - ".next/**"
+      run: bunx oxfmt --check {staged_files}
+
+pre-push:
+  jobs:
+    - name: lint (all)
+      run: bun run lint
+
+    - name: typecheck
+      run: bunx tsc --noEmit
