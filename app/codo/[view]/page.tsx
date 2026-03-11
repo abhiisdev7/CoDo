@@ -35,7 +35,7 @@ export default async function ViewPage({ params }: PageProps) {
   const title = viewSlug.charAt(0).toUpperCase() + viewSlug.slice(1)
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-3xl bg-red-500 mx-auto">
       <h1 className="text-2xl font-semibold text-foreground">{title}</h1>
       <p className="text-muted-foreground">View: {viewSlug}</p>
     </div>

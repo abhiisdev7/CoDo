@@ -1,11 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [
-    "/components/ui",
-    "/bun.lock",
-    "/.next",
-    "/.agents",
-  ],
+  "ignorePatterns": ["/components/ui", "/bun.lock", "/.next", "/.agents"],
   "singleQuote": false,
   "jsxSingleQuote": false,
   "semi": false,
