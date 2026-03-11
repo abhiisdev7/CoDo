@@ -1,14 +1,13 @@
-import { Plus_Jakarta_Sans, Source_Serif_4 } from "next/font/google"
+import { Figtree, Sora } from "next/font/google"
 
-export const fontSans = Plus_Jakarta_Sans({
+export const fontSans = Figtree({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 })
 
-export const fontSerif = Source_Serif_4({
+export const fontHeading = Sora({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
+  variable: "--font-heading",
   display: "swap",
 })

@@ -1,9 +1,10 @@
 import { ThemeSwitch } from "@/components/common/ThemeSwitch"
 
-export default function HomePage() {
+export default function Page() {
   return (
-    <main>
+    <div>
+      main content
       <ThemeSwitch />
-    </main>
+    </div>
   )
 }

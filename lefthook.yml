@@ -16,12 +16,30 @@ pre-commit:
         - "components/ui/**"
         - "bun.lock"
         - ".next/**"
+        - ".vscode/**"
+        - ".agents/**"
       run: bunx oxfmt --check {staged_files}
 
+    - name: fmt
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md}"
+      exclude:
+        - "components/ui/**"
+        - "bun.lock"
+        - ".next/**"
+      run: bunx oxfmt {staged_files}
+
 pre-push:
+  parallel: true
   jobs:
     - name: lint (all)
       run: bun run lint
 
     - name: typecheck
+      exclude: 
+        - ".next/**"
       run: bunx tsc --noEmit
+
+    - name: format check
+        - ".next/**""
+        - ".agents/**"
+      run: bunx oxfmt --check
