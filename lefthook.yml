@@ -15,6 +15,8 @@ pre-commit:
       exclude:
         - "components/ui/**"
         - "bun.lock"
+        - "tsconfig.json"
+        - ".oxfmtrc.json"
         - ".next/**"
         - ".vscode/**"
         - ".agents/**"
@@ -35,11 +37,12 @@ pre-push:
       run: bun run lint
 
     - name: typecheck
-      exclude: 
-        - ".next/**"
       run: bunx tsc --noEmit
 
     - name: format check
-        - ".next/**""
+      exclude:
+        - ".next/**"
         - ".agents/**"
+        - ".vscode/**"
+        - "bun.lock"
       run: bunx oxfmt --check
