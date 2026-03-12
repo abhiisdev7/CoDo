@@ -1,14 +1,14 @@
-import { Children } from "react"
+import { Children, type ReactElement } from "react"
 import { If } from "./If"
 
 import { type ReactNode } from "react"
 
+type ConditionalChild = ReactElement<{
+  isTrue?: boolean
+}>
+
 type Props = {
-  children: ReactNode & {
-    props: {
-      isTrue?: boolean
-    }
-  }
+  children: ConditionalChild | ConditionalChild[]
 }
 
 type ElseProps = {

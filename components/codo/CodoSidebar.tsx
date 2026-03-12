@@ -124,7 +124,7 @@ export function CodoSidebar() {
     >
       <div className="flex flex-col gap-6">
         <Logo />
-        <nav className="flex flex-col gap-4" aria-label="Main">
+        <nav className="flex flex-col gap-12" aria-label="Main">
           <SystemSection pathname={pathname} />
           <TagsSection activeTag={tag} />
         </nav>
