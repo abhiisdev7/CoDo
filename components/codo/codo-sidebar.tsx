@@ -14,7 +14,6 @@ import { motion, type Variants } from "motion/react"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
-import { PlusIcon } from "@icons/plus-animated-icon"
 import { AddNewTag } from "./add-new-tag"
 
 const systemNav = [
@@ -286,7 +285,7 @@ export function NavItem({
       href={href}
       className={cn(
         "flex items-center gap-2 rounded-md px-4 py-3 transition-colors",
-        "hover:bg-accent hover:text-accent-foreground font-heading",
+        "hover:bg-accent hover:text-accent-foreground",
         isActive && "bg-primary/10 text-primary",
         className,
       )}

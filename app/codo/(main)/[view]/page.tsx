@@ -18,7 +18,6 @@ const VALID_VIEWS = [
   "upcoming",
   "overdue",
   "completed",
-  "focus",
   "insights",
   "settings",
 ] as const
