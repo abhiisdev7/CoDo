@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useRef, useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
 import {
   Dialog,
   DialogClose,
@@ -13,17 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@ui/dialog";
-import { Button } from "@ui/button";
-import { PlusIcon, PlusIconHandle } from "@icons/plus-animated-icon";
-import { Input } from "@ui/input";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@ui/field";
-import { cn } from "@/lib/utils";
+} from "@ui/dialog"
+import { Button } from "@ui/button"
+import { PlusIcon, PlusIconHandle } from "@icons/plus-animated-icon"
+import { Input } from "@ui/input"
+import { Field, FieldError, FieldGroup, FieldLabel } from "@ui/field"
+import { cn } from "@/lib/utils"
 
 const COLOR_PRESETS = [
   "#ef4444",
@@ -39,19 +34,19 @@ const COLOR_PRESETS = [
   "#f59e42",
   "#10b981",
   "#0ea5e9",
-] as const;
+] as const
 
 const addTagSchema = z.object({
   name: z.string().min(1, "Name is required").max(32, "Max 32 characters"),
   color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Pick a color"),
-});
+})
 
-type AddTagFormValues = z.infer<typeof addTagSchema>;
-const DEFAULT_COLOR = "#3b82f6";
+type AddTagFormValues = z.infer<typeof addTagSchema>
+const DEFAULT_COLOR = "#3b82f6"
 
 export function AddNewTag() {
-  const iconRef = useRef<PlusIconHandle>(null);
-  const [open, setOpen] = useState(false);
+  const iconRef = useRef<PlusIconHandle>(null)
+  const [open, setOpen] = useState(false)
 
   const form = useForm<AddTagFormValues>({
     resolver: zodResolver(addTagSchema),
@@ -59,23 +54,24 @@ export function AddNewTag() {
       name: "",
       color: DEFAULT_COLOR,
     },
-  });
+  })
 
-  const selectedColor = form.watch("color");
+  const selectedColor = form.watch("color")
 
   const onSubmit = (data: AddTagFormValues) => {
     // TODO: persist tag (e.g. API or local state)
-    console.log("Add tag", data);
-    form.reset();
-    setOpen(false);
-  };
+    console.log("Add tag", data)
+    form.reset()
+    setOpen(false)
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         asChild
         onMouseEnter={() => iconRef.current?.startAnimation?.()}
-        onMouseLeave={() => iconRef.current?.stopAnimation?.()}>
+        onMouseLeave={() => iconRef.current?.stopAnimation?.()}
+      >
         <Button className="mt-2 border-dashed" variant="outline">
           <PlusIcon ref={iconRef} /> Add New Tag
         </Button>
@@ -87,10 +83,7 @@ export function AddNewTag() {
             Add a new tag to organize your tasks. Pick a name and color.
           </DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <FieldGroup>
             <Field data-invalid={!!form.formState.errors.name}>
               <FieldLabel htmlFor="tag-name">Name</FieldLabel>
@@ -101,7 +94,9 @@ export function AddNewTag() {
                 aria-invalid={!!form.formState.errors.name}
                 {...form.register("name")}
               />
-              <FieldError errors={form.formState.errors.name ? [form.formState.errors.name] : undefined} />
+              <FieldError
+                errors={form.formState.errors.name ? [form.formState.errors.name] : undefined}
+              />
             </Field>
 
             <Field data-invalid={!!form.formState.errors.color}>
@@ -114,7 +109,7 @@ export function AddNewTag() {
                     aria-label={`Use color ${hex}`}
                     className={cn(
                       "size-8 rounded-md border-2 border-transparent transition-[border-color,transform] hover:scale-110 cursor-pointer",
-                      selectedColor === hex && "border-2 border-foreground shadow-sm"
+                      selectedColor === hex && "border-2 border-foreground shadow-sm",
                     )}
                     style={{ backgroundColor: hex }}
                     onClick={() => form.setValue("color", hex, { shouldValidate: false })}
@@ -130,7 +125,9 @@ export function AddNewTag() {
                 />
                 <span className="text-sm text-muted-foreground">{selectedColor}</span>
               </div>
-              <FieldError errors={form.formState.errors.color ? [form.formState.errors.color] : undefined} />
+              <FieldError
+                errors={form.formState.errors.color ? [form.formState.errors.color] : undefined}
+              />
             </Field>
           </FieldGroup>
           <DialogFooter>
@@ -144,5 +141,5 @@ export function AddNewTag() {
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

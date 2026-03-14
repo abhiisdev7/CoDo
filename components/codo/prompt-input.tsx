@@ -65,7 +65,8 @@ export function PromptInput() {
         side="top"
         align="start"
         className={cn("rounded-xl p-3", panel !== "date_picker" && "w-50")}
-        sideOffset={8}>
+        sideOffset={8}
+      >
         <Switch
           value={panel!}
           components={{
@@ -143,10 +144,7 @@ function DateContent({ setPanel }: { setPanel: Dispatch<SetStateAction<PanelType
 function PriorityContent() {
   return (
     <div className="flex flex-col gap-1">
-      <PromptMenuItem
-        label="Low"
-        icon={<span className="size-2.5 rounded-full bg-sky-400" />}
-      />
+      <PromptMenuItem label="Low" icon={<span className="size-2.5 rounded-full bg-sky-400" />} />
       <PromptMenuItem
         label="Medium"
         active

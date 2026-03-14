@@ -1,10 +1,7 @@
 import { PromptInput } from "@/components/codo/prompt-input"
 import { SearchInput } from "@/components/codo/search-input"
 import { TodoItem } from "@/components/codo/todo-item"
-import {
-  TaskCalendar,
-  type CalendarTask,
-} from "@/components/ui/task-calendar"
+import { TaskCalendar, type CalendarTask } from "@/components/ui/task-calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs"
 import { Calendar, CalendarFold, ListTodo } from "lucide-react"
 import { notFound } from "next/navigation"

@@ -152,7 +152,6 @@ function Logo() {
   )
 }
 
-
 function IconNavItem({
   item,
   isActive,
@@ -206,7 +205,6 @@ function SystemSection({ pathname }: { pathname: string }) {
 }
 
 function TagsSection({ activeTag }: { activeTag: string }) {
-
   return (
     <div className="flex flex-col gap-2">
       <motion.h2

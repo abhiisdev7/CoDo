@@ -28,9 +28,15 @@ export function TodoItem({ sortEnabled }: { sortEnabled?: boolean }) {
             <span className="size-1.5 rounded-full bg-blue-500"></span>
             <span>Work</span>
           </span>
-          <Badge variant="secondary" className="bg-destructive/20 text-destructive">High</Badge>
-          <Badge variant="secondary" className="bg-blue-500/20 text-blue-500">Low</Badge>
-          <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-500">Medium</Badge>
+          <Badge variant="secondary" className="bg-destructive/20 text-destructive">
+            High
+          </Badge>
+          <Badge variant="secondary" className="bg-blue-500/20 text-blue-500">
+            Low
+          </Badge>
+          <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-500">
+            Medium
+          </Badge>
         </ItemDescription>
       </ItemContent>
       <ItemActions>
