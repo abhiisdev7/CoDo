@@ -1,4 +1,4 @@
-import { CodoSidebar } from "@/components/codo/CodoSidebar"
+import { CodoSidebar } from "@/components/codo/codo-sidebar"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

@@ -15,8 +15,7 @@ import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { PlusIcon } from "@icons/plus-animated-icon"
-
-// ─── Config ─────────────────────────────────────────────────────────────────
+import { AddNewTag } from "./add-new-tag"
 
 const systemNav = [
   { href: "/codo/inbox", label: "Inbox", icon: FlameIcon, badge: 2 },
@@ -37,8 +36,6 @@ const footerNav = [
   { href: "/codo/insights", label: "Insights", icon: ChartPieIcon },
   { href: "/codo/settings", label: "Settings", icon: SettingsIcon },
 ] as const
-
-// ─── Motion ───────────────────────────────────────────────────────────────
 
 const sidebarVariants: Variants = {
   hidden: { opacity: 0 },
@@ -86,8 +83,6 @@ const listItemVariants: Variants = {
   hover: { scale: 1.01 },
 }
 
-// ─── Types ─────────────────────────────────────────────────────────────────
-
 export interface IconHandle {
   startAnimation: () => void
   stopAnimation: () => void
@@ -106,8 +101,6 @@ function getBadge(item: IconNavEntry): number | undefined {
   const withBadge = item as { badge?: number }
   return typeof withBadge.badge === "number" ? withBadge.badge : undefined
 }
-
-// ─── Sidebar ───────────────────────────────────────────────────────────────
 
 export function CodoSidebar() {
   const pathname = usePathname()
@@ -134,8 +127,6 @@ export function CodoSidebar() {
   )
 }
 
-// ─── Logo ──────────────────────────────────────────────────────────────────
-
 function Logo() {
   return (
     <motion.div
@@ -161,7 +152,6 @@ function Logo() {
   )
 }
 
-// ─── Icon nav item (DRY for system + footer) ─────────────────────────────────
 
 function IconNavItem({
   item,
@@ -190,8 +180,6 @@ function IconNavItem({
   )
 }
 
-// ─── System section ─────────────────────────────────────────────────────────
-
 function SystemSection({ pathname }: { pathname: string }) {
   return (
     <div className="flex flex-col gap-2">
@@ -217,10 +205,7 @@ function SystemSection({ pathname }: { pathname: string }) {
   )
 }
 
-// ─── Tags section ───────────────────────────────────────────────────────────
-
 function TagsSection({ activeTag }: { activeTag: string }) {
-  const plusIconRef = useRef<IconHandle>(null)
 
   return (
     <div className="flex flex-col gap-2">
@@ -250,22 +235,11 @@ function TagsSection({ activeTag }: { activeTag: string }) {
             custom={i}
           />
         ))}
-        <NavItem
-          href="/codo/tags/new"
-          label="New Tag"
-          leading={<PlusIcon ref={plusIconRef} aria-hidden />}
-          variants={listItemVariants}
-          custom={tagsNav.length}
-          onMouseEnter={() => plusIconRef.current?.startAnimation()}
-          onMouseLeave={() => plusIconRef.current?.stopAnimation()}
-          className="border border-dashed"
-        />
+        <AddNewTag />
       </motion.ul>
     </div>
   )
 }
-
-// ─── Footer section ──────────────────────────────────────────────────────────
 
 function FooterSection({ pathname }: { pathname: string }) {
   return (
@@ -283,8 +257,6 @@ function FooterSection({ pathname }: { pathname: string }) {
     </nav>
   )
 }
-
-// ─── Nav item ───────────────────────────────────────────────────────────────
 
 export function NavItem({
   href,

@@ -15,7 +15,7 @@ import { Badge } from "@ui/badge"
 type PanelType = "date" | "repeat" | "priority" | "date_picker" | null
 
 export function PromptInput() {
-  const [panel, setPanel] = useState<PanelType>("date_picker")
+  const [panel, setPanel] = useState<PanelType>(null)
 
   return (
     <Popover open={panel !== null} onOpenChange={() => setPanel(null)}>
@@ -65,8 +65,7 @@ export function PromptInput() {
         side="top"
         align="start"
         className={cn("rounded-xl p-3", panel !== "date_picker" && "w-50")}
-        sideOffset={8}
-      >
+        sideOffset={8}>
         <Switch
           value={panel!}
           components={{
@@ -146,7 +145,7 @@ function PriorityContent() {
     <div className="flex flex-col gap-1">
       <PromptMenuItem
         label="Low"
-        icon={<span className="size-2.5 rounded-full bg-emerald-500" />}
+        icon={<span className="size-2.5 rounded-full bg-sky-400" />}
       />
       <PromptMenuItem
         label="Medium"

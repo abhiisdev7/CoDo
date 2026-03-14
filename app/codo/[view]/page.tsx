@@ -1,9 +1,19 @@
-import { SearchInput } from "@/components/codo/SearchInput"
-import { PromptInput } from "@/components/codo/PromptInput"
-import { TodoItem } from "@/components/codo/TodoItem"
-import { Button } from "@/components/ui/button"
+import { PromptInput } from "@/components/codo/prompt-input"
+import { SearchInput } from "@/components/codo/search-input"
+import { TodoItem } from "@/components/codo/todo-item"
+import {
+  TaskCalendar,
+  type CalendarTask,
+} from "@/components/ui/task-calendar"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs"
 import { Calendar, CalendarFold, ListTodo } from "lucide-react"
 import { notFound } from "next/navigation"
+
+const MOCK_CALENDAR_TASKS: CalendarTask[] = [
+  { date: new Date(2026, 2, 12), title: "bnm,.", color: "yellow" },
+  { date: new Date(2026, 2, 12), title: "ghnm", color: "pink" },
+  { date: new Date(2026, 2, 21), title: "gnm", color: "yellow" },
+]
 
 const VALID_VIEWS = [
   "inbox",
@@ -40,13 +50,20 @@ export default async function ViewPage({ params }: PageProps) {
   return (
     <div className="w-3xl mx-auto flex flex-col justify-between gap-8 min-h-full">
       <div className="space-y-8">
-        <HeaderTitle />
-        <SearchInput />
-        <div className="space-y-4">
-          <TodoItem />
-          <TodoItem />
-          <TodoItem />
-        </div>
+        <Tabs defaultValue="">
+          <HeaderTitle />
+          <TabsContent value="" className="mt-6 space-y-4">
+            <SearchInput />
+            <div className="space-y-4">
+              <TodoItem sortEnabled />
+              <TodoItem />
+              <TodoItem />
+            </div>
+          </TabsContent>
+          <TabsContent value="calendar" className="mt-6">
+            <TaskCalendar tasks={MOCK_CALENDAR_TASKS} />
+          </TabsContent>
+        </Tabs>
       </div>
       <PromptInput />
     </div>
@@ -61,15 +78,17 @@ function HeaderTitle() {
         <p className="text-muted-foreground">2 tasks active.</p>
       </header>
       <div className="flex gap-2">
-        <Button variant="default" size="icon-lg">
-          <Calendar />
-        </Button>
-        <Button variant="default" size="icon-lg">
-          <ListTodo />
-        </Button>
-        <Button variant="default" size="icon-lg">
-          <CalendarFold />
-        </Button>
+        <TabsList>
+          <TabsTrigger value="rearrange">
+            <Calendar />
+          </TabsTrigger>
+          <TabsTrigger value="">
+            <ListTodo />
+          </TabsTrigger>
+          <TabsTrigger value="calendar">
+            <CalendarFold />
+          </TabsTrigger>
+        </TabsList>
       </div>
     </div>
   )

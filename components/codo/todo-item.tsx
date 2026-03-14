@@ -1,17 +1,17 @@
-import { CircleCheckIcon } from "@icons/circle-check-animated-icon"
 import { Badge } from "@ui/badge"
 import { Button } from "@ui/button"
 import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@ui/item"
-import { Calendar, Circle, GripVertical, ListTree, Trash2 } from "lucide-react"
+import { Calendar, GripVertical, ListTree } from "lucide-react"
+import { DeleteIcon } from "@icons/delete-animated-icon"
+import { SquarePenIcon } from "@icons/square-pen-animated-icon"
+import { CircularCheckbox } from "@ui/circular-checkbox"
 
-export function TodoItem() {
+export function TodoItem({ sortEnabled }: { sortEnabled?: boolean }) {
   return (
     <Item className="bg-background shadow-sm rounded-xl">
-      {/* Drag handle & checkbox */}
-      <div className="flex gap-2">
-        <GripVertical className="text-muted-foreground cursor-grab" />
-        <Circle className="text-muted-foreground hover:text-primary" />
-        <CircleCheckIcon className="text-muted-foreground hover:text-primary" />
+      <div className="flex gap-2 items-center">
+        {sortEnabled && <GripVertical className="text-muted-foreground cursor-grab" />}
+        <CircularCheckbox />
       </div>
       <ItemContent>
         <ItemTitle>Daily Financial Review and Expense Tracking Overview</ItemTitle>
@@ -25,15 +25,20 @@ export function TodoItem() {
             <span>0/3</span>
           </span>
           <span className="flex items-center gap-2">
-            <span className="size-3 rounded-full bg-blue-500"></span>
+            <span className="size-1.5 rounded-full bg-blue-500"></span>
             <span>Work</span>
           </span>
+          <Badge variant="secondary" className="bg-destructive/20 text-destructive">High</Badge>
+          <Badge variant="secondary" className="bg-blue-500/20 text-blue-500">Low</Badge>
+          <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-500">Medium</Badge>
         </ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Badge variant="secondary">High</Badge>
+        <Button variant="secondary" size="icon-sm">
+          <SquarePenIcon />
+        </Button>
         <Button variant="destructive" size="icon-sm">
-          <Trash2 />
+          <DeleteIcon />
         </Button>
       </ItemActions>
     </Item>
