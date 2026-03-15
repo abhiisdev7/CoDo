@@ -10,7 +10,8 @@ import { CircleCheckIcon } from "@icons/circle-check-animated-icon";
 import { cn } from "@/lib/utils";
 
 const SPARKLE_COUNT = 8;
-const SPARKLE_DISTANCE = 20;
+// Increase SPARKLE_DISTANCE to spread the sparkles more widely
+const SPARKLE_DISTANCE = 32;
 
 function createSparkles() {
   return Array.from({ length: SPARKLE_COUNT }, (_, i) => ({
