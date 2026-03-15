@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./*"],
       "@ui/*": ["./components/ui/*"],
-      "@icons/*": ["./components/ui/icons/*"]
+      "@icons/*": ["./components/ui/icons/*"],
+      "@hooks/*": ["./hooks/*"]
     }
   },
   "include": [
