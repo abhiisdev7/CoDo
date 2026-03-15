@@ -133,7 +133,7 @@ export function FocusModeTimer() {
                   isRunning ? "visible opacity-100" : "invisible opacity-0",
                 )}
               />
-              <div className="relative z-10 flex items-end gap-2 sm:gap-3">
+              <div className="relative z-10 flex items-center gap-2 sm:gap-3">
                 <TimeBlock value={getHMS(remainingSeconds).hours} label="Hours" />
                 <span
                   className="pb-4 text-4xl font-medium tabular-nums text-muted-foreground sm:pb-6 sm:text-5xl md:text-6xl"

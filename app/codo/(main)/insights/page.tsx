@@ -1,8 +1,10 @@
-import { HeaderTitle } from "@/components/codo/header-title";
-import { For } from "@/components/utils/For";
-import { CircleCheckBig, TrendingUp, TriangleAlert, Zap } from "lucide-react";
-import { ReactNode } from "react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip"
+import { FocusPeakInsight } from "@/components/codo/focus-peak-insight"
+import { HeaderTitle } from "@/components/codo/header-title"
+import { InsightCard } from "@/components/codo/insight-card"
+import { InsightsStackedBarChart } from "@/components/codo/insights-stacked-bar-graph"
+import { PriorityMixRadialChart } from "@/components/codo/priority-mix-radial-chart"
+import { For } from "@/components/utils/For"
+import { CircleCheckBig, TrendingUp, TriangleAlert, Zap } from "lucide-react"
 
 const INSIGHTS = [
   {
@@ -44,30 +46,8 @@ const INSIGHTS = [
     label: "Interruptions",
     value: "02",
     description: "Context switches detected today.",
-  }
-];
-
-type InsightCardProps = {
-  icon: ReactNode;
-  label: string;
-  value: string;
-  description: string;
-};
-
-function InsightCard({ icon, label, value, description }: InsightCardProps) {
-  return (<Tooltip>
-    <TooltipTrigger asChild>
-      <div className="p-5 bg-background shadow rounded-2xl flex gap-3 items-start">
-        {icon}
-        <div>
-          <span className="text-muted-foreground">{label}</span>
-          <span className="block text-2xl mt-1 font-extrabold leading-tight">{value}</span>
-        </div>
-      </div>
-    </TooltipTrigger>
-    <TooltipContent>{description}</TooltipContent>
-  </Tooltip>);
-}
+  },
+]
 
 export default function Insights() {
   return (
@@ -76,10 +56,14 @@ export default function Insights() {
         title="Productivity Insights"
         description="Deep analysis of your local focus patterns and velocity."
       />
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <For each={INSIGHTS}
-          render={(insight, i) => <InsightCard key={i} {...insight} />} />
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6">
+        <For each={INSIGHTS} render={(insight, i) => <InsightCard key={i} {...insight} />} />
+        <InsightsStackedBarChart />
+        <div className="col-span-3 space-y-6">
+          <PriorityMixRadialChart />
+          <FocusPeakInsight />
+        </div>
       </section>
     </main>
-  );
+  )
 }
