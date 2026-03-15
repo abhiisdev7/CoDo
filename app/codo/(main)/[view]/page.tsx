@@ -5,6 +5,7 @@ import { TaskCalendar, type CalendarTask } from "@/components/ui/task-calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs"
 import { Calendar, CalendarFold, ListTodo } from "lucide-react"
 import { notFound } from "next/navigation"
+import { HeaderTitle } from "@/components/codo/header-title"
 
 const MOCK_CALENDAR_TASKS: CalendarTask[] = [
   { date: new Date(2026, 2, 12), title: "bnm,.", color: "yellow" },
@@ -47,7 +48,7 @@ export default async function ViewPage({ params }: PageProps) {
     <div className="w-3xl mx-auto flex flex-col justify-between gap-8 min-h-full">
       <div className="space-y-8">
         <Tabs defaultValue="">
-          <HeaderTitle />
+          <HeaderSection />
           <TabsContent value="" className="mt-6 space-y-4">
             <SearchInput />
             <div className="space-y-4">
@@ -66,13 +67,10 @@ export default async function ViewPage({ params }: PageProps) {
   )
 }
 
-function HeaderTitle() {
+function HeaderSection() {
   return (
     <div className="flex justify-between">
-      <header>
-        <h1 className="text-4xl font-bold">My Tasks</h1>
-        <p className="text-muted-foreground">2 tasks active.</p>
-      </header>
+      <HeaderTitle title="My Tasks" description="2 Tasks active." />
       <div className="flex gap-2">
         <TabsList>
           <TabsTrigger value="rearrange">

@@ -14,21 +14,21 @@ export function useFullscreen(targetRef: React.MutableRefObject<(Document & {}) 
           document.exitFullscreen()
           break
         case "mozCancelFullScreen" in document:
-          ; (
+          ;(
             document as DocumentWith<{
               mozCancelFullScreen: () => void
             }>
           ).mozCancelFullScreen()
           break
         case "webkitExitFullscreen" in document:
-          ; (
+          ;(
             document as DocumentWith<{
               webkitExitFullscreen: () => void
             }>
           ).webkitExitFullscreen()
           break
         case "msExitFullscreen" in document:
-          ; (
+          ;(
             document as DocumentWith<{
               msExitFullscreen: () => void
             }>
