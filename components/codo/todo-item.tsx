@@ -14,7 +14,9 @@ export function TodoItem({ sortEnabled }: { sortEnabled?: boolean }) {
         <CircularCheckbox />
       </div>
       <ItemContent>
-        <ItemTitle className="text-[16px]">Daily Financial Review and Expense Tracking Overview</ItemTitle>
+        <ItemTitle className="text-[16px]">
+          Daily Financial Review and Expense Tracking Overview
+        </ItemTitle>
         <ItemDescription className="flex gap-4 text-xs mt-2">
           <span className="flex items-center gap-2 text-destructive">
             <Calendar className="size-3" />

@@ -4,13 +4,7 @@ import { useState } from "react"
 
 import { HeaderTitle } from "@/components/codo/header-title"
 import { AddNewTag } from "@/components/codo/add-new-tag"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Badge } from "@ui/badge"
 import { Button } from "@ui/button"
 import { Slider } from "@ui/slider"
@@ -22,10 +16,7 @@ import { PlusIcon } from "@/components/ui/icons/plus-animated-icon"
 export default function Settings() {
   return (
     <main className="w-xl mx-auto flex h-full flex-col gap-8">
-      <HeaderTitle
-        title="Settings"
-        description="Configure your local productivity engine."
-      />
+      <HeaderTitle title="Settings" description="Configure your local productivity engine." />
       <div className="flex flex-col gap-4">
         <AppearanceSettings />
         <MomentumGoalSettings />
@@ -55,18 +46,14 @@ function AppearanceSettings() {
     <Card>
       <CardHeader>
         <CardTitle>Interface & Theme</CardTitle>
-        <CardDescription>
-          Tune how CoDo looks and feels on this device.
-        </CardDescription>
+        <CardDescription>Tune how CoDo looks and feels on this device.</CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
           <Field orientation="responsive" className="bg-muted p-4 rounded-xl">
             <FieldContent>
               <FieldTitle>Appearance Mode</FieldTitle>
-              <FieldDescription>
-                Switch between light and dark.
-              </FieldDescription>
+              <FieldDescription>Switch between light and dark.</FieldDescription>
             </FieldContent>
             <Switch
               checked={isDarkMode}
@@ -99,9 +86,7 @@ function AppearanceSettings() {
                   className="group inline-flex items-center justify-center rounded-full border border-transparent p-1 outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[selected=true]:border-primary data-[selected=true]:ring-2 data-[selected=true]:ring-primary/40"
                   aria-label={`Set accent color to ${item.id}`}
                 >
-                  <span
-                    className={`size-7 rounded-full ${item.className}`}
-                  />
+                  <span className={`size-7 rounded-full ${item.className}`} />
                 </button>
               ))}
             </div>
@@ -121,9 +106,7 @@ function MomentumGoalSettings() {
     <Card>
       <CardHeader>
         <CardTitle>Momentum Goal</CardTitle>
-        <CardDescription>
-          Set a realistic daily target to keep your streak alive.
-        </CardDescription>
+        <CardDescription>Set a realistic daily target to keep your streak alive.</CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
@@ -134,9 +117,7 @@ function MomentumGoalSettings() {
                 {value} {value === 1 ? "task" : "tasks"}
               </Badge>
             </div>
-            <FieldDescription>
-              How many tasks do you aim to complete each day?
-            </FieldDescription>
+            <FieldDescription>How many tasks do you aim to complete each day?</FieldDescription>
             <div className="mt-4">
               <Slider
                 min={1}
@@ -158,9 +139,7 @@ function MomentumGoalSettings() {
 }
 
 function TagManagement() {
-  const [tags, setTags] = useState<
-    { id: string; name: string; color: string }[]
-  >([
+  const [tags, setTags] = useState<{ id: string; name: string; color: string }[]>([
     { id: "work", name: "Work", color: "#0f172a" },
     { id: "personal", name: "Personal", color: "#10b981" },
     { id: "fitness", name: "Fitness", color: "#f59e0b" },
@@ -176,9 +155,7 @@ function TagManagement() {
     <Card>
       <CardHeader>
         <CardTitle>Tag Management</CardTitle>
-        <CardDescription>
-          Curate the labels you use to organize tasks.
-        </CardDescription>
+        <CardDescription>Curate the labels you use to organize tasks.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-wrap items-center gap-3">
         {tags.map((tag) => (
@@ -242,24 +219,16 @@ function DataControls() {
     <Card>
       <CardHeader>
         <CardTitle>Data Controls</CardTitle>
-        <CardDescription>
-          Export, import, or reset your local productivity data.
-        </CardDescription>
+        <CardDescription>Export, import, or reset your local productivity data.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-3 @md:flex-row @md:items-center @md:justify-between">
           <div className="flex flex-1 flex-wrap gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => console.log("export-data")}>
+            <Button type="button" variant="outline" onClick={() => console.log("export-data")}>
               <Download className="mr-2 size-4" />
               Export data
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => console.log("import-data")}>
+            <Button type="button" variant="outline" onClick={() => console.log("import-data")}>
               <Upload className="mr-2 size-4" />
               Import data
             </Button>
@@ -270,7 +239,7 @@ function DataControls() {
             className="@md:w-auto w-full"
             onClick={() => {
               const confirmed = window.confirm(
-                "This will permanently clear all local CoDo data on this device. Continue?"
+                "This will permanently clear all local CoDo data on this device. Continue?",
               )
 
               if (confirmed) {

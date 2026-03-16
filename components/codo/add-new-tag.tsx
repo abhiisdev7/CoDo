@@ -14,6 +14,7 @@ import {
 } from "@ui/dialog"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@ui/field"
 import { Input } from "@ui/input"
+import { PaintBucket } from "lucide-react"
 import { ReactNode, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -59,9 +60,7 @@ export function AddNewTag({ children }: { children: ReactNode }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create New Tag</DialogTitle>
@@ -97,14 +96,12 @@ export function AddNewTag({ children }: { children: ReactNode }) {
                     className="group inline-flex items-center justify-center rounded-full border border-transparent p-1 outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[selected=true]:border-primary data-[selected=true]:ring-2 data-[selected=true]:ring-primary/40"
                     aria-label={`Set accent color to ${hex}`}
                   >
-                    <span
-                      className="size-7 rounded-full"
-                      style={{ backgroundColor: hex }}
-                    />
+                    <span className="size-7 rounded-full" style={{ backgroundColor: hex }} />
                   </button>
                 ))}
               </div>
               <div className="flex items-center gap-2 pt-1">
+                <PaintBucket />
                 <input
                   type="color"
                   className="size-10 cursor-pointer rounded-md border border-input bg-transparent p-0 shadow-xs [&::-webkit-color-swatch-wrapper]:p-0.5 [&::-webkit-color-swatch]:rounded-md [&::-webkit-color-swatch]:border-0 [&::-moz-color-swatch]:rounded-md [&::-moz-color-swatch]:border-0"

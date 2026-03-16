@@ -37,7 +37,7 @@ const footerNav = [
   { href: "/codo/focus", label: "Focus Mode", icon: LoaderPinwheelIcon },
   { href: "/codo/insights", label: "Insights", icon: ChartPieIcon },
   { href: "/codo/settings", label: "Settings", icon: SettingsIcon },
-  { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon }
+  { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon },
 ] as const
 
 const sidebarVariants: Variants = {
