@@ -1,6 +1,6 @@
-import { FocusModeTask } from "@/components/codo/focus-mode-task"
-import { FocusModeTimer } from "@/components/codo/focus-mode-timer"
-import { FocusModeActions } from "@/components/codo/focus-mode-actions"
+import { FocusModeTimer } from "@/components/codo/focus-mode/focus-mode-timer"
+import { FocusModeTask } from "@/components/codo/focus-mode/focus-mode-task"
+import { FocusModeActions } from "@/components/codo/focus-mode/focus-mode-actions"
 
 export default function FocusMode() {
   return (

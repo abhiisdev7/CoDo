@@ -2,7 +2,7 @@ import { Search } from "lucide-react"
 import { InputGroup, InputGroupInput, InputGroupText } from "@ui/input-group"
 import { Badge } from "@ui/badge"
 
-export function SearchInput() {
+export function TaskSearchInput() {
   return (
     <InputGroup className="px-6 py-8 bg-background dark:bg-background shadow-sm border-0 rounded-xl">
       <InputGroupText>

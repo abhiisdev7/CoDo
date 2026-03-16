@@ -14,21 +14,21 @@ export function useFullscreen(targetRef: React.MutableRefObject<(Document & {}) 
           document.exitFullscreen()
           break
         case "mozCancelFullScreen" in document:
-          ;(
+          ; (
             document as DocumentWith<{
               mozCancelFullScreen: () => void
             }>
           ).mozCancelFullScreen()
           break
         case "webkitExitFullscreen" in document:
-          ;(
+          ; (
             document as DocumentWith<{
               webkitExitFullscreen: () => void
             }>
           ).webkitExitFullscreen()
           break
         case "msExitFullscreen" in document:
-          ;(
+          ; (
             document as DocumentWith<{
               msExitFullscreen: () => void
             }>
@@ -39,19 +39,20 @@ export function useFullscreen(targetRef: React.MutableRefObject<(Document & {}) 
           break
       }
     } else {
-      if (targetRef.current) {
+      const el = targetRef.current
+      if (el && typeof el === "object") {
         switch (true) {
-          case "requestFullscreen" in targetRef.current:
-            targetRef.current.requestFullscreen()
+          case "requestFullscreen" in el:
+            ; (el as unknown as { requestFullscreen: () => void }).requestFullscreen()
             break
-          case "mozRequestFullScreen" in targetRef.current:
-            targetRef.current.mozRequestFullScreen()
+          case "mozRequestFullScreen" in el:
+            ; (el as unknown as { mozRequestFullScreen: () => void }).mozRequestFullScreen()
             break
-          case "webkitRequestFullscreen" in targetRef.current:
-            targetRef.current.webkitRequestFullscreen()
+          case "webkitRequestFullscreen" in el:
+            ; (el as unknown as { webkitRequestFullscreen: () => void }).webkitRequestFullscreen()
             break
-          case "msRequestFullscreen" in targetRef.current:
-            targetRef.current.msRequestFullscreen()
+          case "msRequestFullscreen" in el:
+            ; (el as unknown as { msRequestFullscreen: () => void }).msRequestFullscreen()
             break
           default:
             console.log("Fullscreen API is not supported.")

@@ -60,7 +60,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function InsightsStackedBarChart() {
+export function InsightStackedBarChart() {
   const totalTasks = chartData.reduce((s, d) => s + d.total, 0)
   const totalCompleted = chartData.reduce((s, d) => s + d.completed, 0)
   const completionRate = totalTasks > 0 ? Math.round((totalCompleted / totalTasks) * 100) : 0

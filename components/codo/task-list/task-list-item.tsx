@@ -6,7 +6,7 @@ import { DeleteIcon } from "@icons/delete-animated-icon"
 import { SquarePenIcon } from "@icons/square-pen-animated-icon"
 import { CircularCheckbox } from "@ui/circular-checkbox"
 
-export function TodoItem({ sortEnabled }: { sortEnabled?: boolean }) {
+export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
   return (
     <Item className="bg-background shadow-sm rounded-xl">
       <div className="flex gap-2 items-center">

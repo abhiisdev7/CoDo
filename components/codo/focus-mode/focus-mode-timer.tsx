@@ -2,6 +2,7 @@
 
 import { CircleCheck, Pause, Play, RotateCcw } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { motion } from "motion/react"
 
 import { Button } from "@/components/ui/button"
 import { ShineBorder } from "@/components/ui/shine-border"
@@ -102,9 +103,12 @@ export function FocusModeTimer() {
   }, [showCompleted])
 
   return (
-    <section
+    <motion.section
       className="flex flex-col items-center gap-8 py-8 font-sans"
       aria-label="Focus mode timer"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       {/* Digit-based time display: Hours : Minutes : Seconds */}
       <div
@@ -180,6 +184,6 @@ export function FocusModeTimer() {
           Reset
         </Button>
       </div>
-    </section>
+    </motion.section>
   )
 }

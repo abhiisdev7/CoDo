@@ -46,7 +46,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function PriorityMixRadialChart() {
+export function InsightPriorityRadialChart() {
   const d = chartData[0]
   const total = d.high + d.medium + d.low
 

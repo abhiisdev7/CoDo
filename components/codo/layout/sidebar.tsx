@@ -10,14 +10,18 @@ import { ClockIcon } from "@icons/clock-animated-icon"
 import { FlameIcon } from "@icons/flame-animated-icon"
 import { LoaderPinwheelIcon } from "@icons/pinwheel-animated-icon"
 import { SettingsIcon } from "@icons/settings-animated-icon"
-import { Badge } from "@ui/badge"
 import { motion, type Variants } from "motion/react"
-import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
-import { AddNewTag } from "./add-new-tag"
+import { AddNewTag } from "../settings/add-new-tag"
 import { Button } from "@ui/button"
 import { PlusIcon } from "@icons/plus-animated-icon"
+import { SidebarNavItem } from "./sidebar-nav-item"
+
+export interface IconHandle {
+  startAnimation: () => void
+  stopAnimation: () => void
+}
 
 const systemNav = [
   { href: "/codo/inbox", label: "Inbox", icon: FlameIcon, badge: 2 },
@@ -84,11 +88,6 @@ const listItemVariants: Variants = {
     },
   }),
   hover: { scale: 1.01 },
-}
-
-export interface IconHandle {
-  startAnimation: () => void
-  stopAnimation: () => void
 }
 
 type IconComponent = ComponentType<{
@@ -168,7 +167,7 @@ function IconNavItem({
   const Icon = item.icon as IconComponent
 
   return (
-    <NavItem
+    <SidebarNavItem
       href={item.href}
       label={item.label}
       isActive={isActive}
@@ -225,7 +224,7 @@ function TagsSection({ activeTag }: { activeTag: string }) {
         animate="visible"
       >
         {tagsNav.map((tag, i) => (
-          <NavItem
+          <SidebarNavItem
             key={tag.href}
             href={tag.href}
             label={tag.label}
@@ -260,80 +259,5 @@ function FooterSection({ pathname }: { pathname: string }) {
         ))}
       </motion.ul>
     </nav>
-  )
-}
-
-export function NavItem({
-  href,
-  label,
-  isActive = false,
-  leading,
-  badge,
-  className,
-  isTag = false,
-  onMouseEnter,
-  onMouseLeave,
-  variants,
-  custom,
-}: {
-  href: string
-  label: string
-  isActive?: boolean
-  leading?: React.ReactNode
-  badge?: number
-  className?: string
-  isTag?: boolean
-  onMouseEnter?: () => void
-  onMouseLeave?: () => void
-  variants?: Variants
-  custom?: number
-}) {
-  const content = (
-    <Link
-      href={href}
-      className={cn(
-        "flex items-center gap-2 rounded-md px-4 py-3 transition-colors",
-        "hover:bg-accent hover:text-accent-foreground",
-        isActive && "bg-primary/10 text-primary",
-        className,
-      )}
-    >
-      {leading}
-      <span className="min-w-0 flex-1 truncate">{label}</span>
-      {badge !== undefined ? (
-        <Badge
-          variant={isActive ? "default" : "secondary"}
-          className={cn(
-            "ml-auto shrink-0 text-xs",
-            isActive && "bg-primary/20 text-primary hover:bg-primary/30",
-          )}
-        >
-          {badge}
-        </Badge>
-      ) : null}
-      {isActive && isTag ? <span className="size-1 rounded-full bg-primary" aria-hidden /> : null}
-    </Link>
-  )
-
-  if (variants) {
-    return (
-      <motion.li
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        variants={variants}
-        custom={custom}
-        initial="hidden"
-        animate="visible"
-        whileHover="hover"
-      >
-        {content}
-      </motion.li>
-    )
-  }
-
-  return (
-    <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {content}
-    </li>
   )
 }

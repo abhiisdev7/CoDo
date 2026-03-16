@@ -1,8 +1,9 @@
-import { FocusPeakInsight } from "@/components/codo/focus-peak-insight"
-import { HeaderTitle } from "@/components/codo/header-title"
-import { InsightCard } from "@/components/codo/insight-card"
-import { InsightsStackedBarChart } from "@/components/codo/insights-stacked-bar-graph"
-import { PriorityMixRadialChart } from "@/components/codo/priority-mix-radial-chart"
+import { PageHeaderTitle } from "@/components/codo/shared/page-header-title"
+import { InsightCard } from "@/components/codo/insights/insight-card"
+import { InsightStackedBarChart } from "@/components/codo/insights/insight-stacked-bar-chart"
+import { InsightPriorityRadialChart } from "@/components/codo/insights/insight-priority-radial-chart"
+import { FocusPeakInsightCard } from "@/components/codo/insights/focus-peak-insight-card"
+import { InsightsSectionWithMotion } from "@/components/codo/insights/insights-section-with-motion"
 import { For } from "@/components/utils/For"
 import { CircleCheckBig, TrendingUp, TriangleAlert, Zap } from "lucide-react"
 
@@ -51,19 +52,19 @@ const INSIGHTS = [
 
 export default function Insights() {
   return (
-    <main className="max-w-6xl mx-auto px-4 py-12 space-y-10 min-h-full">
-      <HeaderTitle
+    <main className="p-8 max-w-6xl mx-auto space-y-10 min-h-full">
+      <PageHeaderTitle
         title="Productivity Insights"
         description="Deep analysis of your local focus patterns and velocity."
       />
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6">
+      <InsightsSectionWithMotion>
         <For each={INSIGHTS} render={(insight, i) => <InsightCard key={i} {...insight} />} />
-        <InsightsStackedBarChart />
+        <InsightStackedBarChart />
         <div className="col-span-3 space-y-6">
-          <PriorityMixRadialChart />
-          <FocusPeakInsight />
+          <InsightPriorityRadialChart />
+          <FocusPeakInsightCard />
         </div>
-      </section>
+      </InsightsSectionWithMotion>
     </main>
   )
 }

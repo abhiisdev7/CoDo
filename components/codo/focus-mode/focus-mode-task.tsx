@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight, ListTodo, Lock } from "lucide-react"
 import React, { useCallback, useMemo, useState } from "react"
+import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@ui/button"
@@ -240,11 +241,11 @@ export function FocusModeTask({ tasks = MOCK_TASKS, onFinish }: FocusModeTaskPro
         task.id !== taskId
           ? task
           : {
-              ...task,
-              subSteps: task.subSteps.map((s) =>
-                s.id !== stepId ? s : { ...s, completed: checked },
-              ),
-            },
+            ...task,
+            subSteps: task.subSteps.map((s) =>
+              s.id !== stepId ? s : { ...s, completed: checked },
+            ),
+          },
       ),
     )
   }, [])
@@ -259,23 +260,30 @@ export function FocusModeTask({ tasks = MOCK_TASKS, onFinish }: FocusModeTaskPro
   if (taskList.length === 0) return null
 
   return (
-    <Card className="w-full max-w-md">
-      {currentTask && (
-        <TaskCardContent
-          task={currentTask}
-          onToggleStep={handleToggleStep}
-          onFinish={handleFinish}
-        />
-      )}
-      <CardFooter className="flex justify-between">
-        <FocusTaskFooterNav
-          onPrev={handlePrev}
-          onNext={handleNext}
-          canGoPrev={canGoPrev}
-          canGoNext={canGoNext}
-          isLocked={lockedTaskId === currentTask?.id}
-        />
-      </CardFooter>
-    </Card>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: 0.08, ease: "easeOut" }}
+      className="w-full max-w-md"
+    >
+      <Card>
+        {currentTask && (
+          <TaskCardContent
+            task={currentTask}
+            onToggleStep={handleToggleStep}
+            onFinish={handleFinish}
+          />
+        )}
+        <CardFooter className="flex justify-between">
+          <FocusTaskFooterNav
+            onPrev={handlePrev}
+            onNext={handleNext}
+            canGoPrev={canGoPrev}
+            canGoNext={canGoNext}
+            isLocked={lockedTaskId === currentTask?.id}
+          />
+        </CardFooter>
+      </Card>
+    </motion.div>
   )
 }

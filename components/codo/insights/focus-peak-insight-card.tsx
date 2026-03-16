@@ -1,7 +1,7 @@
 import { Target } from "lucide-react"
 import { InsightCard } from "./insight-card"
 
-export function FocusPeakInsight() {
+export function FocusPeakInsightCard() {
   return (
     <InsightCard
       icon={

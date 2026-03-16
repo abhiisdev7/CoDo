@@ -15,7 +15,7 @@ import { PlusIcon } from "@ui/icons/plus-animated-icon"
 
 type PanelType = "date" | "repeat" | "priority" | "date_picker" | null
 
-export function PromptInput() {
+export function TaskPromptInput() {
   const [panel, setPanel] = useState<PanelType>(null)
 
   return (

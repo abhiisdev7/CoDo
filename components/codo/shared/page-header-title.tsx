@@ -1,4 +1,10 @@
-export function HeaderTitle({ title, description = "" }: { title: string; description?: string }) {
+export function PageHeaderTitle({
+  title,
+  description = "",
+}: {
+  title: string
+  description?: string
+}) {
   return (
     <header>
       <h1 className="scroll-m-20 pb-2 text-3xl tracking-tight font-sans font-bold first:mt-0">
