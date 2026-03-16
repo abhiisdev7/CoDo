@@ -208,7 +208,7 @@ function DayCell({
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.15 }}
       className={cn(
-        "flex min-h-24 flex-col gap-1 rounded-xl border hover:border-2 p-2 bg-muted/20 transition-colors",
+        "flex min-h-24 flex-col gap-1 rounded-xl border hover:border-2 p-2 bg-background shadow transition-colors",
         isCurrentMonth ? "text-foreground" : "text-muted-foreground/50 border-muted",
         isToday && "border-primary border-2"
       )}

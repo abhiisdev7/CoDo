@@ -216,7 +216,7 @@ function Support() {
 
 function DataControls() {
   return (
-    <Card>
+    <Card className="mb-8">
       <CardHeader>
         <CardTitle>Data Controls</CardTitle>
         <CardDescription>Export, import, or reset your local productivity data.</CardDescription>

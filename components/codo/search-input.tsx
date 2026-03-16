@@ -4,7 +4,7 @@ import { Badge } from "@ui/badge"
 
 export function SearchInput() {
   return (
-    <InputGroup className="px-6 py-8 bg-background shadow-sm border-0 rounded-xl">
+    <InputGroup className="px-6 py-8 bg-background dark:bg-background shadow-sm border-0 rounded-xl">
       <InputGroupText>
         <Search className="size-5" />
       </InputGroupText>

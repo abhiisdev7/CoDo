@@ -49,7 +49,7 @@ export default async function ViewPage({ params }: PageProps) {
       <div className="space-y-8">
         <Tabs defaultValue="">
           <HeaderSection />
-          <TabsContent value="" className="mt-6 space-y-4">
+          <TabsContent value="" className="mt-6 space-y-8">
             <SearchInput />
             <div className="space-y-4">
               <TodoItem sortEnabled />

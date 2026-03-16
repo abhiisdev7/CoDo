@@ -3,14 +3,15 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Switch } from "@/components/utils/Switch"
 import { cn } from "@/lib/utils"
+import { Badge } from "@ui/badge"
 import { Button } from "@ui/button"
 import { Calendar } from "@ui/calendar"
 import { Popover, PopoverAnchor, PopoverContent } from "@ui/popover"
 import { Separator } from "@ui/separator"
 import { Textarea } from "@ui/textarea"
-import { Calendar as CalendarIcon, CalendarSearch, Goal, Info, Plus, Repeat } from "lucide-react"
-import { useState, type ReactNode, SetStateAction, Dispatch } from "react"
-import { Badge } from "@ui/badge"
+import { Calendar as CalendarIcon, CalendarSearch, Goal, Info, Repeat } from "lucide-react"
+import { Dispatch, SetStateAction, useState, type ReactNode } from "react"
+import { PlusIcon } from "@ui/icons/plus-animated-icon"
 
 type PanelType = "date" | "repeat" | "priority" | "date_picker" | null
 
@@ -23,11 +24,11 @@ export function PromptInput() {
         <div className="rounded-xl bg-background space-y-2 shadow-sm relative">
           <div className="flex gap-2 p-2 pb-0">
             <Textarea
-              className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0"
+              className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 bg-background!"
               placeholder="Type task... (e.g. 'Pay bills @tomorrow !high #personal *daily')"
             />
             <Button size="icon-lg">
-              <Plus />
+              <PlusIcon />
             </Button>
           </div>
           <Separator className="py-0 my-1" />
