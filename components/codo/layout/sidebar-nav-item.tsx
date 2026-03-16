@@ -46,7 +46,7 @@ export function SidebarNavItem({
         <Badge
           variant={isActive ? "default" : "secondary"}
           className={cn(
-            "ml-auto shrink-0 text-xs",
+            "ml-auto shrink-0 text-xs rounded-sm",
             isActive && "bg-primary/20 text-primary hover:bg-primary/30",
           )}
         >

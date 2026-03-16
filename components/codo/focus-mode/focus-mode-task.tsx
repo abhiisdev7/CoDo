@@ -241,11 +241,11 @@ export function FocusModeTask({ tasks = MOCK_TASKS, onFinish }: FocusModeTaskPro
         task.id !== taskId
           ? task
           : {
-            ...task,
-            subSteps: task.subSteps.map((s) =>
-              s.id !== stepId ? s : { ...s, completed: checked },
-            ),
-          },
+              ...task,
+              subSteps: task.subSteps.map((s) =>
+                s.id !== stepId ? s : { ...s, completed: checked },
+              ),
+            },
       ),
     )
   }, [])

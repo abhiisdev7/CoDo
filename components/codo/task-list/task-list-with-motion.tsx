@@ -28,12 +28,7 @@ const listItemVariants: Variants = {
 
 export function TaskListWithMotion() {
   return (
-    <motion.div
-      className="space-y-4"
-      variants={listVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <motion.div className="space-y-4" variants={listVariants} initial="hidden" animate="visible">
       <motion.div variants={listItemVariants} custom={0}>
         <TaskListItem sortEnabled />
       </motion.div>

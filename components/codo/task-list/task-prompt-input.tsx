@@ -21,7 +21,7 @@ export function TaskPromptInput() {
   return (
     <Popover open={panel !== null} onOpenChange={() => setPanel(null)}>
       <PopoverAnchor asChild>
-        <div className="rounded-xl bg-background space-y-2 shadow-sm relative">
+        <div className="rounded-xl bg-background space-y-2 shadow-sm relative mb-8">
           <div className="flex gap-2 p-2 pb-0">
             <Textarea
               className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 bg-background!"

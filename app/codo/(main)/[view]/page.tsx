@@ -25,7 +25,7 @@ export default async function ViewPage({ params }: PageProps) {
   }
 
   return (
-    <div className="p-8 w-3xl mx-auto min-h-full">
+    <div className="p-8 pb-0 w-3xl mx-auto min-h-full">
       <TaskViewContent>
         <div className="space-y-8">
           <Tabs defaultValue="">
