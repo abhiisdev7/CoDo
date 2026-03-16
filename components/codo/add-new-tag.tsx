@@ -1,9 +1,7 @@
 "use client"
 
-import { useRef, useState } from "react"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { Button } from "@ui/button"
 import {
   Dialog,
   DialogClose,
@@ -14,26 +12,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@ui/dialog"
-import { Button } from "@ui/button"
-import { PlusIcon, PlusIconHandle } from "@icons/plus-animated-icon"
-import { Input } from "@ui/input"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@ui/field"
-import { cn } from "@/lib/utils"
+import { Input } from "@ui/input"
+import { ReactNode, useState } from "react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
+// Match System Accent palette from settings page
 const COLOR_PRESETS = [
-  "#ef4444",
-  "#f97316",
-  "#eab308",
-  "#22c55e",
-  "#14b8a6",
-  "#3b82f6",
   "#8b5cf6",
+  "#22c55e",
+  "#eab308",
   "#ec4899",
-  "#94a3b8",
-  "#f43f5e",
-  "#f59e42",
-  "#10b981",
   "#0ea5e9",
+  "#3b82f6",
+  "#ef4444",
 ] as const
 
 const addTagSchema = z.object({
@@ -42,10 +35,9 @@ const addTagSchema = z.object({
 })
 
 type AddTagFormValues = z.infer<typeof addTagSchema>
-const DEFAULT_COLOR = "#3b82f6"
+const DEFAULT_COLOR = COLOR_PRESETS[COLOR_PRESETS.length - 1]
 
-export function AddNewTag() {
-  const iconRef = useRef<PlusIconHandle>(null)
+export function AddNewTag({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
 
   const form = useForm<AddTagFormValues>({
@@ -67,14 +59,8 @@ export function AddNewTag() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger
-        asChild
-        onMouseEnter={() => iconRef.current?.startAnimation?.()}
-        onMouseLeave={() => iconRef.current?.stopAnimation?.()}
-      >
-        <Button className="mt-2 border-dashed" variant="outline">
-          <PlusIcon ref={iconRef} /> Add New Tag
-        </Button>
+      <DialogTrigger asChild>
+        {children}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -101,19 +87,21 @@ export function AddNewTag() {
 
             <Field data-invalid={!!form.formState.errors.color}>
               <FieldLabel>Color</FieldLabel>
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="mt-3 flex flex-wrap gap-3">
                 {COLOR_PRESETS.map((hex) => (
                   <button
                     key={hex}
                     type="button"
-                    aria-label={`Use color ${hex}`}
-                    className={cn(
-                      "size-8 rounded-md border-2 border-transparent transition-[border-color,transform] hover:scale-110 cursor-pointer",
-                      selectedColor === hex && "border-2 border-foreground shadow-sm",
-                    )}
-                    style={{ backgroundColor: hex }}
+                    data-selected={selectedColor === hex}
                     onClick={() => form.setValue("color", hex, { shouldValidate: false })}
-                  />
+                    className="group inline-flex items-center justify-center rounded-full border border-transparent p-1 outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[selected=true]:border-primary data-[selected=true]:ring-2 data-[selected=true]:ring-primary/40"
+                    aria-label={`Set accent color to ${hex}`}
+                  >
+                    <span
+                      className="size-7 rounded-full"
+                      style={{ backgroundColor: hex }}
+                    />
+                  </button>
                 ))}
               </div>
               <div className="flex items-center gap-2 pt-1">

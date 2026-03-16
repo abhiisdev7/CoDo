@@ -5,6 +5,7 @@ import { BadgeAlertIcon } from "@icons/badge-alert-animated-icon"
 import { CalendarDaysIcon } from "@icons/calendar-animated-icon"
 import { ChartPieIcon } from "@icons/chart-pie-animated-icon"
 import { CircleCheckIcon } from "@icons/circle-check-animated-icon"
+import { CircleHelpIcon } from "@icons/circle-help-animated-icon"
 import { ClockIcon } from "@icons/clock-animated-icon"
 import { FlameIcon } from "@icons/flame-animated-icon"
 import { LoaderPinwheelIcon } from "@icons/pinwheel-animated-icon"
@@ -15,6 +16,8 @@ import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { AddNewTag } from "./add-new-tag"
+import { Button } from "@ui/button"
+import { PlusIcon } from "@icons/plus-animated-icon"
 
 const systemNav = [
   { href: "/codo/inbox", label: "Inbox", icon: FlameIcon, badge: 2 },
@@ -34,6 +37,7 @@ const footerNav = [
   { href: "/codo/focus", label: "Focus Mode", icon: LoaderPinwheelIcon },
   { href: "/codo/insights", label: "Insights", icon: ChartPieIcon },
   { href: "/codo/settings", label: "Settings", icon: SettingsIcon },
+  { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon }
 ] as const
 
 const sidebarVariants: Variants = {
@@ -232,7 +236,11 @@ function TagsSection({ activeTag }: { activeTag: string }) {
             custom={i}
           />
         ))}
-        <AddNewTag />
+        <AddNewTag>
+          <Button className="mt-2 border-dashed" variant="outline">
+            <PlusIcon /> Add New Tag
+          </Button>
+        </AddNewTag>
       </motion.ul>
     </div>
   )

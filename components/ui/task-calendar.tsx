@@ -19,6 +19,7 @@ import { AnimatePresence, motion } from "motion/react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "./card"
 
 const WEEKDAY_LABELS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const
 
@@ -104,40 +105,36 @@ export function TaskCalendar({
     return map
   }, [tasks])
 
-  return (
-    <div className={cn("flex w-full flex-col gap-4 bg-background p-4 rounded-xl border", className)}>
-      <header
-        className="flex flex-wrap items-center justify-between gap-2"
-        aria-label="Calendar navigation">
-        <h2 className="text-lg font-bold tabular-nums">
-          {format(month, "MMMM yyyy")}
-        </h2>
-        <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMonth(subMonths(month, 1))}
-            aria-label="Previous month"
-            className={cn(buttonVariants({ variant: "ghost" }), "size-8")}>
-            <ChevronLeftIcon className="size-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={goToToday}
-            aria-label="Go to today">
-            Today
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMonth(addMonths(month, 1))}
-            aria-label="Next month"
-            className={cn(buttonVariants({ variant: "ghost" }), "size-8")}>
-            <ChevronRightIcon className="size-4" />
-          </Button>
-        </div>
-      </header>
+  return (<Card>
+    <CardHeader>
+      <CardTitle className="font-sans">{format(month, "MMMM yyyy")}</CardTitle>
+      <CardAction className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setMonth(subMonths(month, 1))}
+          aria-label="Previous month"
+          className={cn(buttonVariants({ variant: "ghost" }), "size-8")}>
+          <ChevronLeftIcon className="size-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={goToToday}
+          aria-label="Go to today">
+          Today
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setMonth(addMonths(month, 1))}
+          aria-label="Next month"
+          className={cn(buttonVariants({ variant: "ghost" }), "size-8")}>
+          <ChevronRightIcon className="size-4" />
+        </Button>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
 
       <div
         role="grid"
@@ -180,7 +177,8 @@ export function TaskCalendar({
           </motion.div>
         </AnimatePresence>
       </div>
-    </div>
+    </CardContent>
+  </Card >
   )
 }
 
@@ -211,7 +209,7 @@ function DayCell({
       transition={{ duration: 0.15 }}
       className={cn(
         "flex min-h-24 flex-col gap-1 rounded-xl border hover:border-2 p-2 bg-muted/20 transition-colors",
-        isCurrentMonth ? "text-foreground" : "text-muted-foreground/70 border-muted",
+        isCurrentMonth ? "text-foreground" : "text-muted-foreground/50 border-muted",
         isToday && "border-primary border-2"
       )}
       onClick={() => onDayClick?.(day)}>

@@ -5,9 +5,9 @@ export function FocusPeakInsight() {
   return (
     <InsightCard
       icon={
-        <div className="size-14 flex-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-500/50 dark:text-purple-400">
-          <Target />
-        </div>
+        <span className="p-2 bg-fuchsia-100 dark:bg-fuchsia-900/50 size-14 flex-center text-violet-600 dark:text-rose-300 rounded-xl">
+          <Target className="" />
+        </span>
       }
       label="Peak Focus - Most active on this week."
       value="March 15"

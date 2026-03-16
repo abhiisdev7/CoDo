@@ -103,7 +103,7 @@ export function FocusModeTimer() {
 
   return (
     <section
-      className="flex flex-col items-center gap-8 py-8 font-heading"
+      className="flex flex-col items-center gap-8 py-8 font-sans"
       aria-label="Focus mode timer"
     >
       {/* Digit-based time display: Hours : Minutes : Seconds */}
