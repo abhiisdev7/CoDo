@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Badge } from "@ui/badge"
 import { Slider } from "@ui/slider"
-import { Field, FieldContent, FieldDescription, FieldGroup, FieldTitle } from "@ui/field"
+import { Field, FieldDescription, FieldGroup, FieldTitle } from "@ui/field"
 
 export function SettingsMomentumGoal() {
   const [dailyTarget, setDailyTarget] = useState<number[]>([4])

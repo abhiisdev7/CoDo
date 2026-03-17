@@ -16,7 +16,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@ui/field"
 import { Input } from "@ui/input"
 import { PaintBucket } from "lucide-react"
 import { ReactNode, useState } from "react"
-import { useForm } from "react-hook-form"
+import { useForm, useWatch } from "react-hook-form"
 import { z } from "zod"
 
 // Match System Accent palette from settings page
@@ -49,7 +49,11 @@ export function AddNewTag({ children }: { children: ReactNode }) {
     },
   })
 
-  const selectedColor = form.watch("color")
+  const selectedColor = useWatch({
+    control: form.control,
+    name: "color",
+    defaultValue: DEFAULT_COLOR,
+  })
 
   const onSubmit = (data: AddTagFormValues) => {
     // TODO: persist tag (e.g. API or local state)

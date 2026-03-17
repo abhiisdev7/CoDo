@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Button } from "@ui/button"
+import { X } from "lucide-react"
 import { AddNewTag } from "./add-new-tag"
 import { PlusIcon } from "@/components/ui/icons/plus-animated-icon"
 
@@ -14,9 +15,7 @@ export function SettingsTagManagement() {
   ])
 
   function handleDeleteTag(id: string) {
-    const tag = tags.find((t) => t.id === id)
     setTags((current) => current.filter((t) => t.id !== id))
-    console.log({ action: "delete-tag", tag })
   }
 
   return (
@@ -27,14 +26,9 @@ export function SettingsTagManagement() {
       </CardHeader>
       <CardContent className="flex flex-wrap items-center gap-3">
         {tags.map((tag) => (
-          <Button
+          <span
             key={tag.id}
-            type="button"
-            variant="outline"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground shadow-none"
-            onClick={() => {
-              console.log({ action: "select-tag", tag })
-            }}
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground shadow-none"
           >
             <span
               className="size-3.5 rounded-full border border-border"
@@ -42,7 +36,17 @@ export function SettingsTagManagement() {
               aria-hidden="true"
             />
             <span>{tag.name}</span>
-          </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="size-6 rounded-full"
+              aria-label={`Remove tag ${tag.name}`}
+              onClick={() => handleDeleteTag(tag.id)}
+            >
+              <X className="size-3.5" />
+            </Button>
+          </span>
         ))}
         <AddNewTag>
           <Button className="border-dashed rounded-full" variant="outline">

@@ -18,7 +18,6 @@ export type ParseTaskResult = {
   recurrence: "daily" | "weekly" | "monthly" | null
 }
 
-const DATE_TOKENS = ["today", "tomorrow", "next_week"] as const
 const PRIORITY_TOKENS = ["low", "medium", "high"] as const
 const RECURRENCE_TOKENS = ["daily", "weekly", "monthly"] as const
 

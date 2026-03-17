@@ -26,7 +26,9 @@ export function TaskPromptInput() {
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
   const isSameDay = (a: Date, b: Date) =>
-    a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()
+    a.getDate() === b.getDate() &&
+    a.getMonth() === b.getMonth() &&
+    a.getFullYear() === b.getFullYear()
   const dateLabel = parsed.date
     ? isSameDay(parsed.date, today)
       ? "Today"
@@ -35,8 +37,12 @@ export function TaskPromptInput() {
         : format(parsed.date, "EEE")
     : "Today"
   const dateBadge = parsed.date ? format(parsed.date, "dd-MM-yy") : format(today, "dd-MM-yy")
-  const priorityLabel = parsed.priority ? parsed.priority.charAt(0).toUpperCase() + parsed.priority.slice(1) : "Medium"
-  const recurrenceLabel = parsed.recurrence ? parsed.recurrence.charAt(0).toUpperCase() + parsed.recurrence.slice(1) : "One-off"
+  const priorityLabel = parsed.priority
+    ? parsed.priority.charAt(0).toUpperCase() + parsed.priority.slice(1)
+    : "Medium"
+  const recurrenceLabel = parsed.recurrence
+    ? parsed.recurrence.charAt(0).toUpperCase() + parsed.recurrence.slice(1)
+    : "One-off"
 
   return (
     <Popover open={panel !== null} onOpenChange={() => setPanel(null)}>

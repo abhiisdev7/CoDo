@@ -219,7 +219,8 @@ export function FocusModeTask({ tasks = MOCK_TASKS, onFinish }: FocusModeTaskPro
     tasks.map((t) => ({ ...t, subSteps: t.subSteps.map((s) => ({ ...s })) })),
   )
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [lockedTaskId, setLockedTaskId] = useState<string | null>(null)
+  // setter reserved for future lock UI
+  const [lockedTaskId] = useState<string | null>(null)
 
   const currentTask = taskList[currentIndex] ?? null
   const canGoPrev = currentIndex > 0
