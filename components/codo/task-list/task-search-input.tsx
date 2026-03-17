@@ -10,7 +10,9 @@ export function TaskSearchInput() {
       </InputGroupText>
       <InputGroupInput placeholder="Search tasks, tags, or focus areas... (Press / to focus)" />
       <InputGroupText>
-        <Badge variant="secondary" className="rounded-sm">/</Badge>
+        <Badge variant="secondary" className="rounded-sm">
+          /
+        </Badge>
       </InputGroupText>
     </InputGroup>
   )

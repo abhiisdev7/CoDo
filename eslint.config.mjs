@@ -7,12 +7,18 @@ const eslintConfig = defineConfig([
   ...nextTs,
   // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
     "components/ui/**",
+    "node_modules/**",
+    ".agents/**",
+    ".vscode/**",
+    "*.tsbuildinfo",
+    "bun.lock",
+    "package-lock.json",
+    "pnpm-lock.yaml",
   ]),
 ])
 

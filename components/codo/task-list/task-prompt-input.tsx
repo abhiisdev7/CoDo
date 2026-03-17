@@ -1,5 +1,6 @@
 "use client"
 
+import { parseTaskText } from "@/packages/task-text-parser.ts"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Switch } from "@/components/utils/Switch"
 import { cn } from "@/lib/utils"
@@ -9,14 +10,33 @@ import { Calendar } from "@ui/calendar"
 import { Popover, PopoverAnchor, PopoverContent } from "@ui/popover"
 import { Separator } from "@ui/separator"
 import { Textarea } from "@ui/textarea"
+import { format } from "date-fns"
 import { Calendar as CalendarIcon, CalendarSearch, Goal, Info, Repeat } from "lucide-react"
-import { Dispatch, SetStateAction, useState, type ReactNode } from "react"
+import { Dispatch, SetStateAction, useMemo, useState, type ReactNode } from "react"
 import { PlusIcon } from "@ui/icons/plus-animated-icon"
 
 type PanelType = "date" | "repeat" | "priority" | "date_picker" | null
 
 export function TaskPromptInput() {
   const [panel, setPanel] = useState<PanelType>(null)
+  const [inputValue, setInputValue] = useState("")
+  const parsed = useMemo(() => parseTaskText(inputValue), [inputValue])
+
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const isSameDay = (a: Date, b: Date) =>
+    a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()
+  const dateLabel = parsed.date
+    ? isSameDay(parsed.date, today)
+      ? "Today"
+      : isSameDay(parsed.date, tomorrow)
+        ? "Tomorrow"
+        : format(parsed.date, "EEE")
+    : "Today"
+  const dateBadge = parsed.date ? format(parsed.date, "dd-MM-yy") : format(today, "dd-MM-yy")
+  const priorityLabel = parsed.priority ? parsed.priority.charAt(0).toUpperCase() + parsed.priority.slice(1) : "Medium"
+  const recurrenceLabel = parsed.recurrence ? parsed.recurrence.charAt(0).toUpperCase() + parsed.recurrence.slice(1) : "One-off"
 
   return (
     <Popover open={panel !== null} onOpenChange={() => setPanel(null)}>
@@ -26,6 +46,8 @@ export function TaskPromptInput() {
             <Textarea
               className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 bg-background!"
               placeholder="Type task... (e.g. 'Pay bills @tomorrow !high #personal *daily')"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
             <Button size="icon-lg">
               <PlusIcon />
@@ -35,14 +57,14 @@ export function TaskPromptInput() {
           <div className="flex justify-between p-2 pt-1">
             <div className="space-x-2">
               <Button variant="outline" onClick={() => setPanel("date")}>
-                <CalendarSearch /> Today
-                <Badge variant="secondary">13-03-26</Badge>
+                <CalendarSearch /> {dateLabel}
+                <Badge variant="secondary">{dateBadge}</Badge>
               </Button>
               <Button variant="outline" onClick={() => setPanel("repeat")}>
-                <Repeat /> One-off
+                <Repeat /> {recurrenceLabel}
               </Button>
               <Button variant="outline" onClick={() => setPanel("priority")}>
-                <Goal /> Medium
+                <Goal /> {priorityLabel}
               </Button>
             </div>
             <div className="flex items-center gap-2">

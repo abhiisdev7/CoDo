@@ -1,0 +1,4 @@
+# Bun config: exclude unwanted paths from test discovery
+# https://bun.sh/docs/test/configuration
+[test]
+pathIgnorePatterns = ["node_modules", ".next", ".agents", ".vscode", "out", "build", "coverage"]

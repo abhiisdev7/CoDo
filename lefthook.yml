@@ -1,5 +1,6 @@
-# Lefthook hooks for CoDo (Next.js + ESLint + oxfmt)
+# Lefthook hooks for CoDo (Next.js + ESLint + oxfmt + tests)
 # https://lefthook.dev/configuration/
+# Tests: any file matching *.test.* or *.spec.* is run via `bun test`.
 
 pre-commit:
   parallel: true
@@ -30,19 +31,29 @@ pre-commit:
         - ".next/**"
       run: bunx oxfmt {staged_files}
 
+    - name: test
+      glob: "**/*.{ts,tsx}"
+      exclude:
+        - "**/node_modules/**"
+        - "**/.next/**"
+        - "**/components/ui/**"
+        - "**/.agents/**"
+        - "**/.vscode/**"
+        - "**/*.tsbuildinfo"
+        - "next-env.d.ts"
+      run: bun run test
+
 pre-push:
   parallel: true
   jobs:
     - name: lint (all)
-      run: bun run lint
+      run: bunx eslint . --max-warnings 0
 
     - name: typecheck
       run: bunx tsc --noEmit
 
+    - name: test
+      run: bun run test
+
     - name: format check
-      exclude:
-        - ".next/**"
-        - ".agents/**"
-        - ".vscode/**"
-        - "bun.lock"
-      run: bunx oxfmt --check
+      run: bunx oxfmt --check app components lib packages hooks css --no-error-on-unmatched-pattern
