@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
 import { ChevronRight, HelpCircle } from "lucide-react"
+import Link from "next/link"
 
 export function SettingsSupport() {
   return (
@@ -10,9 +11,9 @@ export function SettingsSupport() {
         <CardTitle>Support</CardTitle>
       </CardHeader>
       <CardContent>
-        <button
+        <Link
+          href="/codo/documentation"
           type="button"
-          onClick={() => console.log("open-help-and-documentation")}
           className="flex w-full items-center gap-3 rounded-xl bg-muted px-4 py-3 text-left outline-none transition hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
         >
           <span className="flex size-8 items-center justify-center rounded-full bg-destructive/10 text-destructive">
@@ -25,7 +26,7 @@ export function SettingsSupport() {
             </span>
           </div>
           <ChevronRight className="size-4 text-muted-foreground" />
-        </button>
+        </Link>
       </CardContent>
     </Card>
   )

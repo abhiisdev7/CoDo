@@ -5,18 +5,17 @@ import { BadgeAlertIcon } from "@icons/badge-alert-animated-icon"
 import { CalendarDaysIcon } from "@icons/calendar-animated-icon"
 import { ChartPieIcon } from "@icons/chart-pie-animated-icon"
 import { CircleCheckIcon } from "@icons/circle-check-animated-icon"
-import { CircleHelpIcon } from "@icons/circle-help-animated-icon"
 import { ClockIcon } from "@icons/clock-animated-icon"
 import { FlameIcon } from "@icons/flame-animated-icon"
 import { LoaderPinwheelIcon } from "@icons/pinwheel-animated-icon"
+import { PlusIcon } from "@icons/plus-animated-icon"
 import { SettingsIcon } from "@icons/settings-animated-icon"
+import { Button } from "@ui/button"
+import { ScrollArea } from "@ui/scroll-area"
 import { motion, type Variants } from "motion/react"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { AddNewTag } from "../settings/add-new-tag"
-import { Button } from "@ui/button"
-import { ScrollArea } from "@ui/scroll-area"
-import { PlusIcon } from "@icons/plus-animated-icon"
 import { SidebarNavItem } from "./sidebar-nav-item"
 
 export interface IconHandle {
@@ -42,7 +41,7 @@ const footerNav = [
   { href: "/codo/focus", label: "Focus Mode", icon: LoaderPinwheelIcon },
   { href: "/codo/insights", label: "Insights", icon: ChartPieIcon },
   { href: "/codo/settings", label: "Settings", icon: SettingsIcon },
-  { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon },
+  // { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon },
 ] as const
 
 const sidebarVariants: Variants = {

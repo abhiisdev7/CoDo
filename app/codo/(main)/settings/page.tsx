@@ -1,5 +1,3 @@
-"use client"
-
 import { PageHeaderTitle } from "@/components/codo/shared/page-header-title"
 import { SettingsCardsWithMotion } from "@/components/codo/settings/settings-cards-with-motion"
 

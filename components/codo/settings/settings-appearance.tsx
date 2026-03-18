@@ -2,11 +2,13 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
-import { Switch } from "@ui/switch"
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldTitle } from "@ui/field"
+import { useTheme } from "next-themes"
+
+import { AnimatedThemeSwitch } from "@/components/common/AnimatedThemeSwitch"
 
 export function SettingsAppearance() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
   const [accent, setAccent] = useState("red")
 
   const accents = [
@@ -26,20 +28,15 @@ export function SettingsAppearance() {
         <CardDescription>Tune how CoDo looks and feels on this device.</CardDescription>
       </CardHeader>
       <CardContent>
-        <FieldGroup>
+        <FieldGroup className="gap-4">
           <Field orientation="responsive" className="bg-muted p-4 rounded-xl">
             <FieldContent>
               <FieldTitle>Appearance Mode</FieldTitle>
               <FieldDescription>Switch between light and dark.</FieldDescription>
             </FieldContent>
-            <Switch
-              checked={isDarkMode}
-              onCheckedChange={(checked) => {
-                setIsDarkMode(checked)
-                console.log({
-                  appearanceMode: checked ? "dark" : "light",
-                })
-              }}
+            <AnimatedThemeSwitch
+              checked={resolvedTheme === "dark"}
+              onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
             />
           </Field>
 
