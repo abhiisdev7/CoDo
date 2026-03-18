@@ -15,6 +15,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { AddNewTag } from "../settings/add-new-tag"
 import { Button } from "@ui/button"
+import { ScrollArea } from "@ui/scroll-area"
 import { PlusIcon } from "@icons/plus-animated-icon"
 import { SidebarNavItem } from "./sidebar-nav-item"
 
@@ -111,15 +112,15 @@ export function CodoSidebar() {
 
   return (
     <motion.aside
-      className="flex min-w-64 max-w-[300px] flex-col justify-between border-r border-border bg-background p-6"
+      className="flex h-dvh min-w-64 max-w-[300px] flex-col justify-between border-r border-border bg-background p-6"
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
       aria-label="CoDo navigation"
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex min-h-0 flex-1 flex-col gap-6">
         <Logo />
-        <nav className="flex flex-col gap-12" aria-label="Main">
+        <nav className="flex min-h-0 flex-1 flex-col gap-12" aria-label="Main">
           <SystemSection pathname={pathname} />
           <TagsSection activeTag={tag} />
         </nav>
@@ -208,7 +209,7 @@ function SystemSection({ pathname }: { pathname: string }) {
 
 function TagsSection({ activeTag }: { activeTag: string }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex min-h-0 flex-1 flex-col gap-2">
       <motion.h2
         className="px-2 text-xs font-medium uppercase tracking-widest text-muted-foreground"
         variants={sectionHeaderVariants}
@@ -217,30 +218,34 @@ function TagsSection({ activeTag }: { activeTag: string }) {
       >
         Tags
       </motion.h2>
-      <motion.ul
-        className="flex flex-col gap-0.5"
-        variants={listVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {tagsNav.map((tag, i) => (
-          <SidebarNavItem
-            key={tag.href}
-            href={tag.href}
-            label={tag.label}
-            leading={<span className={cn("size-3 shrink-0 rounded-full", tag.color)} aria-hidden />}
-            isTag
-            isActive={activeTag === tag.label.toLowerCase()}
-            variants={listItemVariants}
-            custom={i}
-          />
-        ))}
+      <ScrollArea className="min-h-0 flex-1 pr-2">
+        <motion.ul
+          className="flex flex-col gap-0.5"
+          variants={listVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {tagsNav.map((tag, i) => (
+            <SidebarNavItem
+              key={tag.href}
+              href={tag.href}
+              label={tag.label}
+              leading={
+                <span className={cn("size-3 shrink-0 rounded-full", tag.color)} aria-hidden />
+              }
+              isTag
+              isActive={activeTag === tag.label.toLowerCase()}
+              variants={listItemVariants}
+              custom={i}
+            />
+          ))}
+        </motion.ul>
         <AddNewTag>
-          <Button className="mt-2 border-dashed" variant="outline">
+          <Button className="border-dashed mt-2 w-full" variant="outline">
             <PlusIcon /> Add New Tag
           </Button>
         </AddNewTag>
-      </motion.ul>
+      </ScrollArea>
     </div>
   )
 }
