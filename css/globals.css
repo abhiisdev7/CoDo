@@ -1,15 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "./themes/claude-theme.css";
-@import "./themes/clean-slate-theme.css";
-@import "./themes/corporate-theme.css";
-@import "./themes/marshmallow-theme.css";
-@import "./themes/perplexity-theme.css";
-@import "./themes/slack-theme.css";
-@import "./themes/spotify-theme.css";
-@import "./themes/summer-theme.css";
-@import "./themes/vscode-theme.css";
 
 @custom-variant dark (&:is(.dark *));
 

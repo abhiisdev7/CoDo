@@ -52,7 +52,7 @@ const INSIGHTS = [
 
 export default function Insights() {
   return (
-    <main className="p-8 max-w-6xl mx-auto space-y-10 min-h-full">
+    <main className="p-8 max-w-6xl mx-auto space-y-8 min-h-full">
       <PageHeaderTitle
         title="Productivity Insights"
         description="Deep analysis of your local focus patterns and velocity."
@@ -60,7 +60,7 @@ export default function Insights() {
       <InsightsSectionWithMotion>
         <For each={INSIGHTS} render={(insight, i) => <InsightCard key={i} {...insight} />} />
         <InsightStackedBarChart />
-        <div className="col-span-3 space-y-6">
+        <div className="col-span-3 space-y-4">
           <InsightPriorityRadialChart />
           <FocusPeakInsightCard />
         </div>

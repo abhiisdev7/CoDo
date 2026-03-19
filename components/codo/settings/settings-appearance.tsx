@@ -24,7 +24,7 @@ const themeOptions = [
 
 export function SettingsAppearance() {
   const { resolvedTheme, setTheme } = useTheme()
-  const didSyncThemeRef = useRef(false)
+  const hasMountedRef = useRef(false)
   const [codoTheme, setCodoTheme] = useState(() => {
     if (typeof document === "undefined") return "default"
     const current = document.documentElement.getAttribute("data-codo-theme")
@@ -32,16 +32,29 @@ export function SettingsAppearance() {
   })
 
   useEffect(() => {
-    if (!didSyncThemeRef.current) {
-      didSyncThemeRef.current = true
-      return
-    }
+    const root = document.documentElement
+    const linkId = "codo-theme-link"
+
+    const linkEl =
+      (document.getElementById(linkId) as HTMLLinkElement | null) ??
+      (() => {
+        const el = document.createElement("link") as HTMLLinkElement
+        el.id = linkId
+        el.rel = "stylesheet"
+        document.head.appendChild(el)
+        return el
+      })()
 
     if (codoTheme === "default") {
-      document.documentElement.removeAttribute("data-codo-theme")
+      root.removeAttribute("data-codo-theme")
+      linkEl.removeAttribute("href")
     } else {
-      document.documentElement.setAttribute("data-codo-theme", codoTheme)
+      root.setAttribute("data-codo-theme", codoTheme)
+      linkEl.href = `/themes/${codoTheme}-theme.css`
     }
+
+    if (hasMountedRef.current) console.log({ theme: codoTheme })
+    hasMountedRef.current = true
   }, [codoTheme])
 
   const handleThemeChange = (nextId: (typeof themeOptions)[number]["id"]) => {
