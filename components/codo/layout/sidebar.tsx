@@ -111,7 +111,7 @@ export function CodoSidebar() {
 
   return (
     <motion.aside
-      className="flex h-dvh min-w-64 max-w-[300px] flex-col justify-between border-r border-border bg-background p-6"
+      className="flex h-dvh min-w-64 max-w-[300px] flex-col justify-between border-r border-border bg-card p-6"
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}

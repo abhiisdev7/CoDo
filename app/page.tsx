@@ -1,4 +1,4 @@
-import { ThemeSwitch } from "@/components/common/ThemeSwitch"
+import { ThemeSwitch } from "@/components/common/theme-switch"
 
 export default function HomePage() {
   return (

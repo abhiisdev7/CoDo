@@ -1,25 +1,52 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldTitle } from "@ui/field"
 import { useTheme } from "next-themes"
+import { useEffect, useRef, useState } from "react"
 
-import { AnimatedThemeSwitch } from "@/components/common/AnimatedThemeSwitch"
+import { AnimatedThemeSwitch } from "@/components/common/animated-theme-switch"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { For } from "@/components/utils/For"
+
+const themeOptions = [
+  { id: "default", label: "Default", preview: "oklch(0.6 0.1 185)" },
+  { id: "corporate", label: "Corporate", preview: "oklch(0.48 0.20 260.47)" },
+  { id: "slack", label: "Slack", preview: "oklch(0.37 0.14 323.40)" },
+  { id: "perplexity", label: "Perplexity", preview: "oklch(0.72 0.12 210.36)" },
+  { id: "claude", label: "Claude", preview: "oklch(0.62 0.14 39.15)" },
+  { id: "marshmallow", label: "Marshmallow", preview: "oklch(0.80 0.14 348.82)" },
+  { id: "clean-slate", label: "Clean Slate", preview: "oklch(0.59 0.20 277.06)" },
+  { id: "spotify", label: "Spotify", preview: "oklch(0.67 0.17 153.85)" },
+  { id: "summer", label: "Summer", preview: "oklch(0.70 0.17 28.12)" },
+  { id: "vscode", label: "VS Code", preview: "oklch(0.71 0.15 239.15)" },
+]
 
 export function SettingsAppearance() {
   const { resolvedTheme, setTheme } = useTheme()
-  const [accent, setAccent] = useState("red")
+  const didSyncThemeRef = useRef(false)
+  const [codoTheme, setCodoTheme] = useState(() => {
+    if (typeof document === "undefined") return "default"
+    const current = document.documentElement.getAttribute("data-codo-theme")
+    return current ?? "default"
+  })
 
-  const accents = [
-    { id: "blue", className: "bg-blue-500" },
-    { id: "green", className: "bg-emerald-500" },
-    { id: "orange", className: "bg-orange-500" },
-    { id: "pink", className: "bg-pink-500" },
-    { id: "indigo", className: "bg-indigo-500" },
-    { id: "violet", className: "bg-violet-500" },
-    { id: "red", className: "bg-red-500" },
-  ]
+  useEffect(() => {
+    if (!didSyncThemeRef.current) {
+      didSyncThemeRef.current = true
+      return
+    }
+
+    if (codoTheme === "default") {
+      document.documentElement.removeAttribute("data-codo-theme")
+    } else {
+      document.documentElement.setAttribute("data-codo-theme", codoTheme)
+    }
+  }, [codoTheme])
+
+  const handleThemeChange = (nextId: (typeof themeOptions)[number]["id"]) => {
+    setCodoTheme(nextId)
+  }
 
   return (
     <Card>
@@ -42,27 +69,33 @@ export function SettingsAppearance() {
 
           <Field orientation="vertical" className="bg-muted p-4 rounded-xl">
             <FieldContent>
-              <FieldTitle>System Accent</FieldTitle>
-              <FieldDescription>
-                Choose the accent color used across the interface.
-              </FieldDescription>
+              <FieldTitle>Theme Palette</FieldTitle>
+              <FieldDescription>Choose a color palette for the application.</FieldDescription>
             </FieldContent>
-            <div className="mt-3 flex flex-wrap gap-3">
-              {accents.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  data-selected={accent === item.id}
-                  onClick={() => {
-                    setAccent(item.id)
-                    console.log({ accent: item.id })
-                  }}
-                  className="group inline-flex items-center justify-center rounded-full border border-transparent p-1 outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[selected=true]:border-primary data-[selected=true]:ring-2 data-[selected=true]:ring-primary/40"
-                  aria-label={`Set accent color to ${item.id}`}
-                >
-                  <span className={`size-7 rounded-full ${item.className}`} />
-                </button>
-              ))}
+            <div role="radiogroup" aria-label="Select theme palette" className="flex gap-3">
+              <For
+                each={themeOptions}
+                render={({ id, label, preview }) => (
+                  <Tooltip key={id}>
+                    <TooltipTrigger asChild>
+                      <button
+                        className="size-5 rounded-full relative"
+                        style={{ backgroundColor: preview }}
+                        type="button"
+                        role="radio"
+                        aria-checked={codoTheme === id}
+                        data-selected={codoTheme === id}
+                        onClick={() => handleThemeChange(id)}
+                      >
+                        {codoTheme === id && (
+                          <div className="absolute size-2 bg-background rounded-full inset-1/2 -translate-1/2" />
+                        )}
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>{label}</TooltipContent>
+                  </Tooltip>
+                )}
+              />
             </div>
           </Field>
         </FieldGroup>

@@ -24,7 +24,7 @@ export function InsightCard({ icon, label, value, description }: InsightCardProp
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className="p-5 bg-card shadow-sm rounded-2xl flex gap-3 items-start col-span-2">
+        <div className="p-5 bg-card shadow-sm rounded-2xl flex gap-3 items-start col-span-2 border">
           {icon}
           <div>
             <span className="text-muted-foreground">{label}</span>

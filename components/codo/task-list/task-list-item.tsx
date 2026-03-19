@@ -14,7 +14,7 @@ export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
         <CircularCheckbox />
       </div>
       <ItemContent>
-        <ItemTitle className="text-[16px]">
+        <ItemTitle className="text-sm leading-normal">
           Daily Financial Review and Expense Tracking Overview
         </ItemTitle>
         <ItemDescription className="flex gap-4 text-xs mt-2">

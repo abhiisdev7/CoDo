@@ -15,5 +15,6 @@
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.enable": false
+  "eslint.enable": false,
+  "cSpell.words": ["codo"]
 }
