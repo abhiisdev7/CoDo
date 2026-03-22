@@ -20,6 +20,7 @@ const themeOptions = [
   { id: "spotify", label: "Spotify", preview: "oklch(0.67 0.17 153.85)" },
   { id: "summer", label: "Summer", preview: "oklch(0.70 0.17 28.12)" },
   { id: "vscode", label: "VS Code", preview: "oklch(0.71 0.15 239.15)" },
+  { id: "vercel", label: "Vercel", preview: "oklch(0 0 0)" },
 ]
 
 export function SettingsAppearance() {

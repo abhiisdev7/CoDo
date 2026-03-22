@@ -22,7 +22,7 @@ export default function ToolsPage() {
         description="Every utility available from the toolkit home."
       />
 
-      <Button variant="secondary" asChild className="w-max">
+      <Button variant="secondary" asChild className="w-max" size="sm">
         <Link href="/">
           <ArrowLeft aria-hidden />
           Back to toolkit home
