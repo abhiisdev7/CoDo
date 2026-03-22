@@ -1,35 +1,27 @@
 # Lefthook hooks for CoDo (Next.js + ESLint + oxfmt + tests)
 # https://lefthook.dev/configuration/
 # Tests: any file matching *.test.* or *.spec.* is run via `bun test`.
+#
+# Pre-commit formats and auto-fixes lint on staged files, then re-stages fixes.
 
 pre-commit:
-  parallel: true
+  parallel: false
   jobs:
-    - name: lint
-      glob: "*.{js,jsx,ts,tsx,mjs,cjs}"
-      exclude:
-        - "components/ui/**"
-      run: bunx eslint {staged_files}
-
-    - name: format check
-      glob: "*.{js,jsx,ts,tsx,mjs,cjs,json}"
-      exclude:
-        - "components/ui/**"
-        - "bun.lock"
-        - "tsconfig.json"
-        - ".oxfmtrc.json"
-        - ".next/**"
-        - ".vscode/**"
-        - ".agents/**"
-      run: bunx oxfmt --check {staged_files}
-
-    - name: fmt
+    - name: format (fix)
       glob: "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md}"
       exclude:
         - "components/ui/**"
         - "bun.lock"
         - ".next/**"
       run: bunx oxfmt {staged_files}
+      stage_fixed: true
+
+    - name: lint (fix)
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs}"
+      exclude:
+        - "components/ui/**"
+      run: bunx eslint --fix {staged_files}
+      stage_fixed: true
 
     - name: test
       glob: "**/*.{ts,tsx}"
