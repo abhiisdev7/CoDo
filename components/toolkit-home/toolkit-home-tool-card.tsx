@@ -1,0 +1,41 @@
+"use client"
+
+import type { ToolkitTool } from "@/lib/toolkit/registry"
+import { toolkitToolHref } from "@/lib/toolkit/registry"
+import { motion, useReducedMotion } from "motion/react"
+import Link from "next/link"
+
+type ToolkitHomeToolCardProps = {
+  tool: ToolkitTool
+  index: number
+}
+
+export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
+  const reduceMotion = useReducedMotion()
+  const Icon = tool.icon
+
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.25,
+        delay: reduceMotion ? 0 : index * 0.04,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <Link
+        href={toolkitToolHref(tool.slug)}
+        className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl border-2 border-transparent hover:border-primary bg-muted/40 p-4 text-center shadow-sm transition-colors hover:bg-accent/50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        <span
+          className="flex size-12 items-center justify-center rounded-lg border border-border bg-background text-primary"
+          aria-hidden
+        >
+          <Icon className="size-6" />
+        </span>
+        <span className="text-sm font-medium leading-tight text-foreground">{tool.title}</span>
+      </Link>
+    </motion.div>
+  )
+}
