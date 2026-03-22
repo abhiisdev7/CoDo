@@ -1,21 +1,20 @@
 "use client"
 
-import * as React from "react"
 import {
   addMonths,
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
   format,
-  isSameDay,
   isSameMonth,
   isToday,
   startOfMonth,
   startOfWeek,
-  subMonths,
+  subMonths
 } from "date-fns"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
+import * as React from "react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"

@@ -1,45 +1,87 @@
+"use client"
+
+import { PageHeaderTitle } from "@/components/codo/shared/page-header-title"
+import { Button } from "@/components/ui/button"
+import { TOOLS, toolHref } from "@/lib/tools-registry"
+import { ArrowLeft } from "lucide-react"
+import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
 
-import { getAllToolkitTools, toolkitToolHref } from "@/lib/toolkit/registry"
-
-export default function ToolkitIndexPage() {
-  const tools = getAllToolkitTools()
+export default function ToolsPage() {
+  const reduceMotion = useReducedMotion()
 
   return (
-    <div className="min-h-dvh bg-background text-foreground">
-      <div className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="text-3xl font-semibold tracking-tight">All modules</h1>
-        <p className="mt-2 text-muted-foreground">Every utility available from the toolkit home.</p>
-        <ul className="mt-8 divide-y divide-border rounded-xl border border-border bg-card">
-          {tools.map((tool) => {
-            const Icon = tool.icon
-            return (
-              <li key={tool.slug}>
-                <Link
-                  href={toolkitToolHref(tool.slug)}
-                  className="flex items-center gap-4 px-4 py-4 transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    <motion.main
+      className="mx-auto flex min-h-full max-w-3xl flex-col gap-8 px-8 pb-0 pt-8"
+      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <PageHeaderTitle
+        title="All modules"
+        description="Every utility available from the toolkit home."
+      />
+
+      <Button variant="secondary" asChild className="w-max">
+        <Link href="/">
+          <ArrowLeft aria-hidden />
+          Back to toolkit home
+        </Link>
+      </Button>
+
+      <motion.ul
+        className="divide-y overflow-hidden rounded-xl border border-border bg-card"
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: reduceMotion ? 0 : 0.06,
+              delayChildren: reduceMotion ? 0 : 0.04,
+            },
+          },
+        }}
+        initial="hidden"
+        animate="show"
+      >
+        {TOOLS.map((tool) => {
+          const Icon = tool.icon
+          return (
+            <motion.li
+              key={tool.slug}
+              variants={{
+                hidden: {
+                  opacity: reduceMotion ? 1 : 0,
+                  y: reduceMotion ? 0 : 8,
+                },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: reduceMotion ? 0 : 0.28,
+                    ease: [0.22, 1, 0.36, 1] as const,
+                  },
+                },
+              }}
+            >
+              <Link
+                href={toolHref(tool.slug)}
+                className={`flex gap-4 px-4 py-4 transition-colors hover:bg-muted focus:bg-muted focus:outline-0`}
+              >
+                <span
+                  className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-primary"
+                  aria-hidden
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-primary">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-medium">{tool.title}</span>
-                    <span className="block text-sm text-muted-foreground">{tool.description}</span>
-                  </span>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-        <p className="mt-8">
-          <Link
-            href="/"
-            className="text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
-          >
-            Back to toolkit home
-          </Link>
-        </p>
-      </div>
-    </div>
+                  <Icon className="size-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-medium text-foreground">{tool.title}</span>
+                  <span className="block text-sm text-muted-foreground">{tool.description}</span>
+                </span>
+              </Link>
+            </motion.li>
+          )
+        })}
+      </motion.ul>
+    </motion.main>
   )
 }

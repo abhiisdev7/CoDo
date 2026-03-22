@@ -18,28 +18,26 @@ export function UserProfileCard() {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <button
-          type="button"
-          className="bg-popover rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        <Avatar
+          className="rounded-sm"
+          size="lg"
           aria-haspopup="dialog"
           aria-label={`${user.fullName} profile details`}
         >
-          <Avatar className="rounded-sm" size="lg">
-            <AvatarImage
-              src={user.avatarUrl}
-              alt={`${user.fullName}'s profile picture`}
-              className="rounded-md"
-            />
-            <AvatarFallback aria-label={`Avatar fallback for ${user.fullName}`}>
-              {user.fullName
-                .split(" ")
-                .map((n) => n[0])
-                .join("")
-                .toUpperCase()}
-            </AvatarFallback>
-            <AvatarBadge className="bg-primary" />
-          </Avatar>
-        </button>
+          <AvatarImage
+            src={user.avatarUrl}
+            alt={`${user.fullName}'s profile picture`}
+            className="rounded-md"
+          />
+          <AvatarFallback aria-label={`Avatar fallback for ${user.fullName}`}>
+            {user.fullName
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase()}
+          </AvatarFallback>
+          <AvatarBadge className="bg-primary" />
+        </Avatar>
       </HoverCardTrigger>
       <HoverCardContent
         align="end"

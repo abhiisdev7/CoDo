@@ -1,7 +1,7 @@
 "use client"
 
 import { ToolkitHomeToolCard } from "@/components/toolkit-home/toolkit-home-tool-card"
-import type { ToolkitTool } from "@/lib/toolkit/registry"
+import type { ToolkitTool } from "@/lib/tools-registry"
 import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
 

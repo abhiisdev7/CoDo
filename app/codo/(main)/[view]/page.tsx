@@ -1,21 +1,41 @@
-import { TaskViewHeader } from "@/components/codo/task-list/task-view-header"
-import { TaskViewContent } from "@/components/codo/task-list/task-view-content"
+import { TaskListWithMotion } from "@/components/codo/task-list/task-list-with-motion"
 import { TaskPromptInput } from "@/components/codo/task-list/task-prompt-input"
 import { TaskSearchInput } from "@/components/codo/task-list/task-search-input"
-import { TaskListWithMotion } from "@/components/codo/task-list/task-list-with-motion"
-import { TaskCalendar } from "@/components/ui/task-calendar"
+import { TaskViewContent } from "@/components/codo/task-list/task-view-content"
+import { TaskViewHeader } from "@/components/codo/task-list/task-view-header"
+import { CalendarTask, TaskCalendar } from "@/components/ui/task-calendar"
 import { Tabs, TabsContent } from "@ui/tabs"
 import { notFound } from "next/navigation"
-import { VALID_VIEWS, isValidView } from "@/lib/codo/views"
-import { MOCK_CALENDAR_TASKS } from "@/lib/codo/mock-tasks"
 
 type PageProps = {
   params: Promise<{ view: string }>
 }
 
+export const VALID_VIEWS = [
+  "inbox",
+  "today",
+  "upcoming",
+  "overdue",
+  "completed",
+  "insights",
+  "settings",
+] as const
+
+export type ViewSlug = (typeof VALID_VIEWS)[number]
+
+export function isValidView(slug: string): slug is ViewSlug {
+  return (VALID_VIEWS as readonly string[]).includes(slug)
+}
+
 export function generateStaticParams() {
   return VALID_VIEWS.map((view) => ({ view }))
 }
+
+export const MOCK_CALENDAR_TASKS: CalendarTask[] = [
+  { date: new Date(2026, 2, 12), title: "bnm,.", color: "yellow" },
+  { date: new Date(2026, 2, 12), title: "ghnm", color: "pink" },
+  { date: new Date(2026, 2, 21), title: "gnm", color: "yellow" },
+]
 
 export default async function ViewPage({ params }: PageProps) {
   const { view: viewSlug } = await params
