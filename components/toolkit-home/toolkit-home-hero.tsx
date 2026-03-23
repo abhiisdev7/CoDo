@@ -13,7 +13,7 @@ export function ToolkitHomeHero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        The Zen Architect
+        - CoDo -
       </motion.p>
       <motion.h1
         className="mt-4 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl"

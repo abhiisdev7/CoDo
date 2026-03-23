@@ -50,7 +50,7 @@ export function ToolkitHomeSearch({ value, onChange }: ToolkitHomeSearchProps) {
         <InputGroupAddon align="inline-end" className="pr-4">
           <KbdGroup>
             <Kbd className="hidden sm:inline-flex">{isMac() ? "⌘" : "Ctrl"}</Kbd>
-            <Kbd className="hidden sm:inline-flex">K</Kbd>
+            <Kbd className="hidden sm:inline-flex">k</Kbd>
           </KbdGroup>
         </InputGroupAddon>
       </InputGroup>

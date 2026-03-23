@@ -7,6 +7,8 @@ export type ToolkitTool = {
   description: string
   keywords: string[]
   icon: LucideIcon
+  isCore: boolean
+  badge: "Beta" | "New" | null
 }
 
 export const TOOLS: ToolkitTool[] = [
@@ -16,6 +18,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Task management and productivity tracking.",
     keywords: ["tasks", "todo", "collaborate", "management", "productivity"],
     icon: KeyRound,
+    isCore: true,
+    badge: "Beta",
   },
   {
     slug: "api-tester",
@@ -23,6 +27,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Send requests and inspect responses.",
     keywords: ["api", "http", "rest", "request", "test"],
     icon: Layers,
+    isCore: true,
+    badge: null,
   },
   {
     slug: "json-formatter",
@@ -30,6 +36,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Format and validate JSON payloads.",
     keywords: ["json", "format", "validate", "pretty"],
     icon: Braces,
+    isCore: true,
+    badge: null,
   },
   {
     slug: "markdown-editor",
@@ -37,6 +45,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Write and preview Markdown content.",
     keywords: ["markdown", "md", "documentation", "docs"],
     icon: FileEdit,
+    isCore: true,
+    badge: null,
   },
   {
     slug: "regex-tester",
@@ -44,6 +54,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Test regular expressions against sample text.",
     keywords: ["regex", "pattern", "match"],
     icon: Regex,
+    isCore: true,
+    badge: null,
   },
   {
     slug: "color-picker",
@@ -51,6 +63,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Pick colors and copy values to the clipboard.",
     keywords: ["color", "palette", "hex", "rgb"],
     icon: Palette,
+    isCore: true,
+    badge: null,
   },
   {
     slug: "shell-gen",
@@ -58,6 +72,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Generate shell commands from descriptions.",
     keywords: ["shell", "bash", "terminal", "script"],
     icon: Terminal,
+    isCore: false,
+    badge: null,
   },
   {
     slug: "jwt-debug",
@@ -65,6 +81,8 @@ export const TOOLS: ToolkitTool[] = [
     description: "Decode and inspect JSON Web Tokens.",
     keywords: ["jwt", "token", "auth", "decode"],
     icon: KeyRound,
+    isCore: false,
+    badge: null,
   },
 ]
 

@@ -4,6 +4,7 @@ import type { ToolkitTool } from "@/lib/tools-registry"
 import { toolHref } from "@/lib/tools-registry"
 import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
+import { Badge } from "@ui/badge"
 
 type ToolkitHomeToolCardProps = {
   tool: ToolkitTool
@@ -26,8 +27,16 @@ export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
     >
       <Link
         href={toolHref(tool.slug)}
-        className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl border border-border bg-muted/40 p-4 text-center shadow-sm transition-colors hover:bg-accent/50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl bg-card p-4 text-center shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background relative border hover:border-primary"
       >
+        {tool?.badge !== null && (
+          <Badge
+            variant="outline"
+            className="rounded-sm absolute top-2 right-2 bg-primary/20 border-primary"
+          >
+            {tool?.badge}
+          </Badge>
+        )}
         <span
           className="flex size-12 items-center justify-center rounded-lg border border-border bg-background text-primary"
           aria-hidden

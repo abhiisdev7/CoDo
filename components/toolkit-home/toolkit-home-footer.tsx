@@ -9,7 +9,7 @@ export function ToolkitHomeFooter() {
         Made With Efforts &{" "}
         <HeartHandshake size={20} className="inline text-primary fill-primary/20" />
       </p>
-      <p>© {year} ZenArchitect Labs</p>
+      <p>© {year} CoDo Labs</p>
     </footer>
   )
 }
