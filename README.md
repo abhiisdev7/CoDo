@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Developer Toolkit Application
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is a personal developer toolkit designed to bring together multiple small but essential tools into a single, unified application. The goal is to improve productivity by reducing the need to switch between different websites or tools during development.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Purpose
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+While working on development tasks, developers often rely on various utilities such as JSON formatters, API testers, CSV parsers, and more. This application centralizes those utilities into one place, making workflows faster, simpler, and more efficient.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Core Idea
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- A single application
+- Multiple independent tools
+- Each tool is modular and self-contained
+- Fast and easy access through a clean interface
+- The interface avoids clutter and focuses on simplicity, speed, and usability.
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- Collection of commonly used developer tools
+- Minimal and distraction-free UI
+- Fast navigation between tools
+- Modular architecture for easy scalability
+- Fully responsive design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Example Tools
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Some of the tools included in the application:
 
-## Deploy on Vercel
+- **Task Management** (`CoDo Task`) _(In Progress)_
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design Philosophy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Minimalism over complexity
+- Focus on usability and speed
+- Clean layout with ample spacing
+- Icon-driven navigation
+- Consistent and modern visual design
+
+## Architecture Approach
+
+- Each tool is developed as an independent module
+- Shared components and utilities are reused across tools
+- Easy to add, remove, or update tools without affecting others
+
+## Goal
+
+To build a personal, efficient, and scalable developer productivity hub that simplifies everyday development tasks.
