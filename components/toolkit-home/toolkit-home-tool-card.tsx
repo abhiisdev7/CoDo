@@ -27,7 +27,7 @@ export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
     >
       <Link
         href={toolHref(tool.slug)}
-        className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl bg-card p-4 text-center shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background relative border hover:border-primary"
+        className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl bg-card p-4 text-center shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background relative border hover:border-primary group"
       >
         {tool?.badge !== null && (
           <Badge
@@ -38,7 +38,7 @@ export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
           </Badge>
         )}
         <span
-          className="flex size-12 items-center justify-center rounded-lg border border-border bg-background text-primary"
+          className="flex size-12 items-center justify-center rounded-lg border border-border bg-background text-primary transition-transform duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-110"
           aria-hidden
         >
           <Icon className="size-6" />
