@@ -13,7 +13,7 @@ export type ToolkitTool = {
 
 export const TOOLS: ToolkitTool[] = [
   {
-    slug: "codo",
+    slug: "codo/inbox",
     title: "CoDo Task",
     description: "Task management and productivity tracking.",
     keywords: ["tasks", "todo", "collaborate", "management", "productivity"],
@@ -85,11 +85,3 @@ export const TOOLS: ToolkitTool[] = [
     badge: null,
   },
 ]
-
-/** Resolve navigation URL for a tool slug (CoDo app vs toolkit utilities). */
-export function toolHref(slug: string): string {
-  if (slug === "codo") {
-    return "/codo"
-  }
-  return `/tools/${slug}`
-}

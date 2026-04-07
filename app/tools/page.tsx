@@ -1,9 +1,9 @@
 "use client"
 
+import { createStaggerListReveal, FadeIn, motion, useReducedMotion } from "@/components/animated"
 import { PageHeaderTitle } from "@/components/codo/shared/page-header-title"
 import { Button } from "@/components/ui/button"
-import { createStaggerListReveal, FadeIn, motion, useReducedMotion } from "@/components/animated"
-import { TOOLS, toolHref } from "@/lib/tools-registry"
+import { TOOLS } from "@/lib/tools-registry"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
@@ -42,7 +42,7 @@ export default function ToolsPage() {
           return (
             <motion.li key={tool.slug} variants={staggerList.child}>
               <Link
-                href={toolHref(tool.slug)}
+                href={tool.slug}
                 className={`flex gap-4 px-4 py-4 transition-colors hover:bg-muted focus:bg-muted focus:outline-0`}
               >
                 <span

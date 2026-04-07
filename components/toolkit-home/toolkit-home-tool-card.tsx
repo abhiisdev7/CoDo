@@ -1,7 +1,6 @@
 "use client"
 
 import type { ToolkitTool } from "@/lib/tools-registry"
-import { toolHref } from "@/lib/tools-registry"
 import { FadeIn } from "@/components/animated"
 import Link from "next/link"
 import { Badge } from "@ui/badge"
@@ -17,7 +16,7 @@ export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
   return (
     <FadeIn y={8} duration={0.25} delay={index * 0.04} transition={{ ease: [0.22, 1, 0.36, 1] }}>
       <Link
-        href={toolHref(tool.slug)}
+        href={tool.slug}
         className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl bg-card p-4 text-center shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background relative border hover:border-primary group"
       >
         {tool?.badge !== null && (

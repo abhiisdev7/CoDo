@@ -1,8 +1,8 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { TOOLS, toolHref } from "@/lib/tools-registry"
 import { FadeIn } from "@/components/animated"
+import { Button } from "@/components/ui/button"
+import { TOOLS } from "@/lib/tools-registry"
 import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Plus } from "lucide-react"
 import Link from "next/link"
@@ -25,7 +25,7 @@ export function ToolkitHomeRecentTools() {
             {TOOLS.slice(0, 3).map((tool) => {
               const Icon = tool.icon
               return (
-                <Link key={tool.slug} href={toolHref(tool.slug)}>
+                <Link key={tool.slug} href={tool.slug}>
                   <Button variant="secondary" size="lg">
                     <Icon className="size-4 text-primary" aria-hidden />
                     {tool.title}
