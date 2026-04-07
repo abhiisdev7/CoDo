@@ -2,8 +2,8 @@
 
 import { CircleCheck, Pause, Play, RotateCcw } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { motion } from "motion/react"
 
+import { FadeIn } from "@/components/animated"
 import { Button } from "@/components/ui/button"
 import { ShineBorder } from "@/components/ui/shine-border"
 import { SlidingNumber } from "@/components/ui/sliding-number"
@@ -103,12 +103,13 @@ export function FocusModeTimer() {
   }, [showCompleted])
 
   return (
-    <motion.section
+    <FadeIn
+      as="section"
       className="flex flex-col items-center gap-8 py-8 font-sans"
       aria-label="Focus mode timer"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      y={12}
+      duration={0.3}
+      transition={{ ease: "easeOut" }}
     >
       {/* Digit-based time display: Hours : Minutes : Seconds */}
       <div
@@ -184,6 +185,6 @@ export function FocusModeTimer() {
           Reset
         </Button>
       </div>
-    </motion.section>
+    </FadeIn>
   )
 }

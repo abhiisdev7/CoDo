@@ -3,10 +3,10 @@ import { useEffect, useId } from 'react';
 import {
   MotionValue,
   motion,
+  motionValue,
   useSpring,
   useTransform,
-  motionValue,
-} from 'motion/react';
+} from '@/components/animated';
 import useMeasure from 'react-use-measure';
 
 const TRANSITION = {

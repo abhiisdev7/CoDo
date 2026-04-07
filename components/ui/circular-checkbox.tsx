@@ -1,7 +1,7 @@
 "use client";
 
 import { Circle } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "@/components/animated";
 import * as React from "react";
 import { useRef, useEffect, useCallback } from "react";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";

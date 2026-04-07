@@ -2,7 +2,7 @@
 
 import { ToolkitHomeToolCard } from "@/components/toolkit-home/toolkit-home-tool-card"
 import type { ToolkitTool } from "@/lib/tools-registry"
-import { motion, useReducedMotion } from "motion/react"
+import { FadeIn } from "@/components/animated"
 import Link from "next/link"
 
 type ToolkitHomeCoreToolkitProps = {
@@ -10,14 +10,13 @@ type ToolkitHomeCoreToolkitProps = {
 }
 
 export function ToolkitHomeCoreToolkit({ tools }: ToolkitHomeCoreToolkitProps) {
-  const reduceMotion = useReducedMotion()
-
   return (
-    <motion.section
+    <FadeIn
+      as="section"
       className="space-y-6"
-      initial={reduceMotion ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.35, delay: 0.1 }}
+      mode="fade"
+      delay={0.1}
+      duration={0.35}
       aria-labelledby="core-toolkit-heading"
     >
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -45,6 +44,6 @@ export function ToolkitHomeCoreToolkit({ tools }: ToolkitHomeCoreToolkitProps) {
           ))}
         </div>
       )}
-    </motion.section>
+    </FadeIn>
   )
 }

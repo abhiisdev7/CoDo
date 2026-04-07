@@ -1,43 +1,20 @@
 "use client"
 
-import { motion, type Variants } from "motion/react"
+import { StaggerItem, StaggerRoot } from "@/components/animated"
 import { TaskListItem } from "./task-list-item"
-
-const listVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.04,
-    },
-  },
-}
-
-const listItemVariants: Variants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: typeof i === "number" ? i * 0.06 : 0,
-      duration: 0.22,
-      ease: "easeOut",
-    },
-  }),
-}
 
 export function TaskListWithMotion() {
   return (
-    <motion.div className="space-y-4" variants={listVariants} initial="hidden" animate="visible">
-      <motion.div variants={listItemVariants} custom={0}>
+    <StaggerRoot className="space-y-4">
+      <StaggerItem index={0} preset="compact">
         <TaskListItem sortEnabled />
-      </motion.div>
-      <motion.div variants={listItemVariants} custom={1}>
+      </StaggerItem>
+      <StaggerItem index={1} preset="compact">
         <TaskListItem />
-      </motion.div>
-      <motion.div variants={listItemVariants} custom={2}>
+      </StaggerItem>
+      <StaggerItem index={2} preset="compact">
         <TaskListItem />
-      </motion.div>
-    </motion.div>
+      </StaggerItem>
+    </StaggerRoot>
   )
 }

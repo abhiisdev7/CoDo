@@ -2,8 +2,15 @@
 
 import { ChevronLeft, ChevronRight, ListTodo, Lock } from "lucide-react"
 import React, { useCallback, useMemo, useState } from "react"
-import { AnimatePresence, MotionConfig, motion } from "motion/react"
 
+import {
+  AnimatePresence,
+  BlurFadeListItem,
+  BlurFadeSpan,
+  DirectionalSlide,
+  MotionConfig,
+  motion,
+} from "@/components/animated"
 import { cn } from "@/lib/utils"
 import { Button } from "@ui/button"
 import {
@@ -78,12 +85,10 @@ const MOCK_TASKS: FocusModeTaskData[] = [
 function SubTaskItem({
   subStep,
   index,
-  taskKey,
   onToggle,
 }: {
   subStep: SubStep
   index: number
-  taskKey: string
   onToggle: (id: string, checked: boolean) => void
 }) {
   const done = subStep.completed ?? false
@@ -93,17 +98,8 @@ function SubTaskItem({
   )
 
   return (
-    <motion.li
-      key={`${taskKey}:${subStep.id}`}
-      layout
-      initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
-      transition={{
-        duration: 0.24,
-        ease: "easeOut",
-        delay: Math.min(index * 0.04, 0.2),
-      }}
+    <BlurFadeListItem
+      index={index}
       className={cn(
         "p-2 border rounded-xl flex gap-2 items-center hover:border-primary/50 shadow-sm transition-colors",
         done && "border-primary/60 text-muted-foreground bg-muted/30",
@@ -111,7 +107,7 @@ function SubTaskItem({
     >
       <CircularCheckbox checked={done} onCheckedChange={handleChange} />
       <p className={cn("flex-1 text-sm", done && "line-through")}>{subStep.label}</p>
-    </motion.li>
+    </BlurFadeListItem>
   )
 }
 
@@ -141,16 +137,9 @@ function TaskCardContent({
         <CardDescription>Main Mission</CardDescription>
         <CardTitle className="pr-8">
           <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={task.id}
-              className="block"
-              initial={{ opacity: 0, y: 6, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -6, filter: "blur(10px)" }}
-              transition={{ duration: 0.32, ease: "easeOut" }}
-            >
+            <BlurFadeSpan key={task.id} className="block">
               {task.title}
-            </motion.span>
+            </BlurFadeSpan>
           </AnimatePresence>
         </CardTitle>
         <CardAction>
@@ -175,7 +164,6 @@ function TaskCardContent({
             {task.subSteps.map((subStep, index) => (
               <SubTaskItemMemo
                 key={`${task.id}:${subStep.id}`}
-                taskKey={task.id}
                 index={index}
                 subStep={subStep}
                 onToggle={handleToggle}
@@ -314,33 +302,13 @@ export function FocusModeTask({ tasks = MOCK_TASKS, onFinish }: FocusModeTaskPro
           <Card>
             <AnimatePresence mode="wait" initial={false} custom={navDirection}>
               {currentTask && (
-                <motion.div
-                  key={currentTask.id}
-                  custom={navDirection}
-                  variants={{
-                    enter: (direction: 1 | -1) => ({
-                      opacity: 0,
-                      x: direction === 1 ? 28 : -28,
-                      filter: "blur(6px)",
-                    }),
-                    center: { opacity: 1, x: 0, filter: "blur(0px)" },
-                    exit: (direction: 1 | -1) => ({
-                      opacity: 0,
-                      x: direction === 1 ? -28 : 28,
-                      filter: "blur(6px)",
-                    }),
-                  }}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.26, ease: "easeOut" }}
-                >
+                <DirectionalSlide key={currentTask.id} direction={navDirection}>
                   <TaskCardContent
                     task={currentTask}
                     onToggleStep={handleToggleStep}
                     onFinish={handleFinish}
                   />
-                </motion.div>
+                </DirectionalSlide>
               )}
             </AnimatePresence>
             <CardFooter className="flex justify-between">

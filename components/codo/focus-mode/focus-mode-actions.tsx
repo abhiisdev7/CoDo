@@ -3,7 +3,7 @@
 import { useFullscreen } from "@hooks/use-fullscreen"
 import { Button } from "@ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip"
-import { motion } from "motion/react"
+import { FadeIn } from "@/components/animated"
 import { Maximize, Minimize, X } from "lucide-react"
 import { useEffect, useRef } from "react"
 
@@ -16,12 +16,7 @@ export function FocusModeActions() {
   }, [])
 
   return (
-    <motion.div
-      className="absolute top-12 right-12 space-x-2"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.25, delay: 0.15 }}
-    >
+    <FadeIn className="absolute top-12 right-12 space-x-2" mode="fade" delay={0.15} duration={0.25}>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button size="icon-lg" onClick={toggleFullscreen} variant="outline">
@@ -38,6 +33,6 @@ export function FocusModeActions() {
         </TooltipTrigger>
         <TooltipContent>Exist Focus Mode</TooltipContent>
       </Tooltip>
-    </motion.div>
+    </FadeIn>
   )
 }

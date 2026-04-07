@@ -12,7 +12,15 @@ import { PlusIcon } from "@icons/plus-animated-icon"
 import { SettingsIcon } from "@icons/settings-animated-icon"
 import { Button } from "@ui/button"
 import { ScrollArea } from "@ui/scroll-area"
-import { motion, type Variants } from "motion/react"
+import {
+  HoverScale,
+  motion,
+  reveal,
+  revealLabel,
+  revealLift,
+  staggerItemSlideIn,
+  staggerParentDense,
+} from "@/components/animated"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { AddNewTag } from "../settings/add-new-tag"
@@ -44,52 +52,6 @@ const footerNav = [
   // { href: "/codo/documentation", label: "Documentation", icon: CircleHelpIcon },
 ] as const
 
-const sidebarVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.25, ease: "easeOut" },
-  },
-}
-
-const logoVariants: Variants = {
-  hidden: { opacity: 0, y: -6 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-}
-
-const sectionHeaderVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.2 } },
-}
-
-const listVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.04,
-      delayChildren: 0.06,
-    },
-  },
-}
-
-const listItemVariants: Variants = {
-  hidden: { opacity: 0, x: -8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: typeof i === "number" ? i * 0.04 : 0,
-      duration: 0.25,
-      ease: "easeOut",
-    },
-  }),
-  hover: { scale: 1.01 },
-}
-
 type IconComponent = ComponentType<{
   ref?: React.RefObject<IconHandle | null>
   "aria-hidden"?: boolean
@@ -114,7 +76,7 @@ export function CodoSidebar() {
       className="flex h-dvh min-w-64 max-w-[300px] flex-col justify-between border-r border-border bg-card p-6"
       initial="hidden"
       animate="visible"
-      variants={sidebarVariants}
+      variants={reveal}
       aria-label="CoDo navigation"
     >
       <div className="flex min-h-0 flex-1 flex-col gap-6">
@@ -133,22 +95,20 @@ function Logo() {
   return (
     <motion.div
       className="flex items-center gap-3"
-      variants={logoVariants}
+      variants={revealLift}
       initial="hidden"
       animate="visible"
     >
-      <motion.div
+      <HoverScale
         className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground"
         aria-hidden
-        whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <div className="grid grid-cols-3 gap-0.5">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i} className="size-1.5 rounded-sm bg-current opacity-90" />
           ))}
         </div>
-      </motion.div>
+      </HoverScale>
       <span className="font-semibold text-xl text-foreground">CoDo</span>
     </motion.div>
   )
@@ -175,7 +135,7 @@ function IconNavItem({
       onMouseEnter={() => iconRef.current?.startAnimation()}
       onMouseLeave={() => iconRef.current?.stopAnimation()}
       badge={getBadge(item)}
-      variants={listItemVariants}
+      variants={staggerItemSlideIn}
       custom={index}
     />
   )
@@ -186,7 +146,7 @@ function SystemSection({ pathname }: { pathname: string }) {
     <div className="flex flex-col gap-2">
       <motion.h2
         className="px-2 text-xs font-medium uppercase tracking-widest text-muted-foreground"
-        variants={sectionHeaderVariants}
+        variants={revealLabel}
         initial="hidden"
         animate="visible"
       >
@@ -194,7 +154,7 @@ function SystemSection({ pathname }: { pathname: string }) {
       </motion.h2>
       <motion.ul
         className="flex flex-col gap-0.5"
-        variants={listVariants}
+        variants={staggerParentDense}
         initial="hidden"
         animate="visible"
       >
@@ -211,7 +171,7 @@ function TagsSection({ activeTag }: { activeTag: string }) {
     <div className="flex min-h-0 flex-1 flex-col gap-2">
       <motion.h2
         className="px-2 text-xs font-medium uppercase tracking-widest text-muted-foreground"
-        variants={sectionHeaderVariants}
+        variants={revealLabel}
         initial="hidden"
         animate="visible"
       >
@@ -220,7 +180,7 @@ function TagsSection({ activeTag }: { activeTag: string }) {
       <ScrollArea className="min-h-0 flex-1 pr-2">
         <motion.ul
           className="flex flex-col gap-0.5"
-          variants={listVariants}
+          variants={staggerParentDense}
           initial="hidden"
           animate="visible"
         >
@@ -234,7 +194,7 @@ function TagsSection({ activeTag }: { activeTag: string }) {
               }
               isTag
               isActive={activeTag === tag.label.toLowerCase()}
-              variants={listItemVariants}
+              variants={staggerItemSlideIn}
               custom={i}
             />
           ))}
@@ -254,7 +214,7 @@ function FooterSection({ pathname }: { pathname: string }) {
     <nav className="flex flex-col gap-0.5" aria-label="Settings">
       <motion.ul
         className="flex flex-col gap-0.5"
-        variants={listVariants}
+        variants={staggerParentDense}
         initial="hidden"
         animate="visible"
       >

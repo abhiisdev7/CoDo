@@ -1,7 +1,7 @@
 "use client";
 
-import type { Variants } from "motion/react";
-import { motion, useAnimation } from "motion/react";
+import type { Variants } from "@/components/animated";
+import { motion, useAnimation } from "@/components/animated";
 import type { HTMLAttributes } from "react";
 import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 

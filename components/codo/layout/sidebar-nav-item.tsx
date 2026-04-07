@@ -1,5 +1,7 @@
+"use client"
+
 import Link from "next/link"
-import { motion, type Variants } from "motion/react"
+import { motion, type Variants } from "@/components/animated"
 import { Badge } from "@ui/badge"
 import { cn } from "@/lib/utils"
 

@@ -13,7 +13,7 @@ import {
   subMonths
 } from "date-fns"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion, PresenceSlideX } from "@/components/animated"
 import * as React from "react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -148,12 +148,8 @@ export function TaskCalendar({
           </div>
         ))}
         <AnimatePresence mode="wait" initial={false}>
-          <motion.div
+          <PresenceSlideX
             key={format(month, "yyyy-MM")}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 8 }}
-            transition={{ duration: 0.2 }}
             className="col-span-7 grid grid-cols-7 gap-2">
             {days.map((day) => {
               const dayKey = format(day, "yyyy-MM-dd")
@@ -173,7 +169,7 @@ export function TaskCalendar({
                 />
               )
             })}
-          </motion.div>
+          </PresenceSlideX>
         </AnimatePresence>
       </div>
     </CardContent>
@@ -238,7 +234,8 @@ function DayCell({
             onClick={(e) => {
               e.stopPropagation()
               onTaskClick?.(task)
-            }}>
+            }}
+          >
             {task.title}
           </motion.button>
         ))}

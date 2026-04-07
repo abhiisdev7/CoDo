@@ -2,20 +2,22 @@
 
 import { PageHeaderTitle } from "@/components/codo/shared/page-header-title"
 import { Button } from "@/components/ui/button"
+import { createStaggerListReveal, FadeIn, motion, useReducedMotion } from "@/components/animated"
 import { TOOLS, toolHref } from "@/lib/tools-registry"
 import { ArrowLeft } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
 
 export default function ToolsPage() {
   const reduceMotion = useReducedMotion()
+  const staggerList = createStaggerListReveal(reduceMotion)
 
   return (
-    <motion.main
+    <FadeIn
+      as="main"
+      y={10}
+      duration={0.35}
       className="mx-auto flex min-h-full max-w-3xl flex-col gap-8 px-8 pb-0 pt-8"
-      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ ease: [0.22, 1, 0.36, 1] }}
     >
       <PageHeaderTitle
         title="All modules"
@@ -31,38 +33,14 @@ export default function ToolsPage() {
 
       <motion.ul
         className="divide-y overflow-hidden rounded-xl border border-border bg-card"
-        variants={{
-          hidden: {},
-          show: {
-            transition: {
-              staggerChildren: reduceMotion ? 0 : 0.06,
-              delayChildren: reduceMotion ? 0 : 0.04,
-            },
-          },
-        }}
+        variants={staggerList.parent}
         initial="hidden"
-        animate="show"
+        animate="visible"
       >
         {TOOLS.map((tool) => {
           const Icon = tool.icon
           return (
-            <motion.li
-              key={tool.slug}
-              variants={{
-                hidden: {
-                  opacity: reduceMotion ? 1 : 0,
-                  y: reduceMotion ? 0 : 8,
-                },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: reduceMotion ? 0 : 0.28,
-                    ease: [0.22, 1, 0.36, 1] as const,
-                  },
-                },
-              }}
-            >
+            <motion.li key={tool.slug} variants={staggerList.child}>
               <Link
                 href={toolHref(tool.slug)}
                 className={`flex gap-4 px-4 py-4 transition-colors hover:bg-muted focus:bg-muted focus:outline-0`}
@@ -82,6 +60,6 @@ export default function ToolsPage() {
           )
         })}
       </motion.ul>
-    </motion.main>
+    </FadeIn>
   )
 }

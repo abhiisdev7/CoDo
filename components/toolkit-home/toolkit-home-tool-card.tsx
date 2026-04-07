@@ -2,7 +2,7 @@
 
 import type { ToolkitTool } from "@/lib/tools-registry"
 import { toolHref } from "@/lib/tools-registry"
-import { motion, useReducedMotion } from "motion/react"
+import { FadeIn } from "@/components/animated"
 import Link from "next/link"
 import { Badge } from "@ui/badge"
 
@@ -12,19 +12,10 @@ type ToolkitHomeToolCardProps = {
 }
 
 export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
-  const reduceMotion = useReducedMotion()
   const Icon = tool.icon
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.25,
-        delay: reduceMotion ? 0 : index * 0.04,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
+    <FadeIn y={8} duration={0.25} delay={index * 0.04} transition={{ ease: [0.22, 1, 0.36, 1] }}>
       <Link
         href={toolHref(tool.slug)}
         className="flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-xl bg-card p-4 text-center shadow-sm transition-colors hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background relative border hover:border-primary group"
@@ -45,6 +36,6 @@ export function ToolkitHomeToolCard({ tool, index }: ToolkitHomeToolCardProps) {
         </span>
         <span className="text-sm font-medium leading-tight text-foreground">{tool.title}</span>
       </Link>
-    </motion.div>
+    </FadeIn>
   )
 }

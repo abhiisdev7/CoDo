@@ -2,19 +2,19 @@
 
 import { Button } from "@/components/ui/button"
 import { TOOLS, toolHref } from "@/lib/tools-registry"
+import { FadeIn } from "@/components/animated"
 import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { Plus } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
 
 export function ToolkitHomeRecentTools() {
-  const reduceMotion = useReducedMotion()
-
   return (
-    <motion.section
-      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+    <FadeIn
+      as="section"
+      y={8}
+      duration={0.35}
+      delay={0.15}
+      transition={{ ease: [0.22, 1, 0.36, 1] }}
       aria-labelledby="recent-tools-heading"
     >
       <Card>
@@ -48,6 +48,6 @@ export function ToolkitHomeRecentTools() {
           </CardAction>
         </CardHeader>
       </Card>
-    </motion.section>
+    </FadeIn>
   )
 }

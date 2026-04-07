@@ -5,7 +5,7 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd"
 import { useKeyPress } from "@/hooks/use-key-press"
 import { isMac } from "@/lib/utils"
 import { SearchIcon } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { FadeIn } from "@/components/animated"
 import * as React from "react"
 
 type ToolkitHomeSearchProps = {
@@ -14,7 +14,6 @@ type ToolkitHomeSearchProps = {
 }
 
 export function ToolkitHomeSearch({ value, onChange }: ToolkitHomeSearchProps) {
-  const reduceMotion = useReducedMotion()
   const searchInput = React.useRef<HTMLInputElement>(null)
 
   useKeyPress(["ctrl", "k"], (e) => {
@@ -23,15 +22,12 @@ export function ToolkitHomeSearch({ value, onChange }: ToolkitHomeSearchProps) {
   })
 
   return (
-    <motion.div
+    <FadeIn
       className="w-full max-w-2xl"
-      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        delay: 0.08,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      y={12}
+      duration={0.4}
+      delay={0.08}
+      transition={{ ease: [0.22, 1, 0.36, 1] }}
     >
       <InputGroup className="h-14 rounded-full border-border bg-card px-1 shadow-lg">
         <InputGroupAddon align="inline-start" className="pl-4">
@@ -54,6 +50,6 @@ export function ToolkitHomeSearch({ value, onChange }: ToolkitHomeSearchProps) {
           </KbdGroup>
         </InputGroupAddon>
       </InputGroup>
-    </motion.div>
+    </FadeIn>
   )
 }
