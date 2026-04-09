@@ -1,7 +1,6 @@
 "use client"
 
 import { setupCodo } from "@/services/codo/codo-setup"
-import { Card, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { AlertTriangle } from "lucide-react"
 import { useEffect, useState, type ReactNode } from "react"
 import PageLoader from "../ui/page-loader"

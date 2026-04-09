@@ -41,12 +41,6 @@ const systemNav = [
   { href: "/codo/completed", label: "Completed", icon: CircleCheckIcon },
 ] as const
 
-const tagsNav = [
-  { label: "Work", href: "?tag=work", color: "bg-blue-500" },
-  { label: "Personal", href: "?tag=personal", color: "bg-emerald-500" },
-  { label: "Fitness", href: "?tag=fitness", color: "bg-amber-500" },
-] as const
-
 const footerNav = [
   { href: "/codo/focus", label: "Focus Mode", icon: LoaderPinwheelIcon },
   { href: "/codo/insights", label: "Insights", icon: ChartPieIcon },

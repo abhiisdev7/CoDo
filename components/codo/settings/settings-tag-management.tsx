@@ -44,7 +44,7 @@ export function SettingsTagManagement() {
                 size="icon"
                 className="size-6 rounded-full"
                 aria-label={`Remove tag ${tag.label}`}
-                onClick={() => handleDeleteTag(tag.id)}
+                onClick={() => handleDeleteTag(tag.id!)}
               >
                 <X className="size-3.5" />
               </Button>
