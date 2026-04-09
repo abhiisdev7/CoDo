@@ -16,5 +16,5 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": false,
-  "cSpell.words": ["codo"]
+  "cSpell.words": ["codo", "Dexie"]
 }

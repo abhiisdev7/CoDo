@@ -43,7 +43,7 @@ export function SidebarNavItem({
       )}
     >
       {leading}
-      <span className="min-w-0 flex-1 truncate">{label}</span>
+      <span className="min-w-0 flex-1 truncate capitalize">{label}</span>
       {badge !== undefined ? (
         <Badge
           variant={isActive ? "default" : "secondary"}

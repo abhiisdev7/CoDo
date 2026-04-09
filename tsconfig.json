@@ -22,7 +22,8 @@
       "@/*": ["./*"],
       "@ui/*": ["./components/ui/*"],
       "@icons/*": ["./components/ui/icons/*"],
-      "@hooks/*": ["./hooks/*"]
+      "@hooks/*": ["./hooks/*"],
+      "@services/*": ["./services/*"]
     }
   },
   "include": [

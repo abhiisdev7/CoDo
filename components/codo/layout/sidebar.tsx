@@ -1,6 +1,16 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import {
+  HoverScale,
+  motion,
+  reveal,
+  revealLabel,
+  revealLift,
+  staggerItemSlideIn,
+  staggerParentDense,
+} from "@/components/animated"
+import { For } from "@/components/utils/For"
+import { tagsService } from "@/services/codo/codo-tags-service"
 import { BadgeAlertIcon } from "@icons/badge-alert-animated-icon"
 import { CalendarDaysIcon } from "@icons/calendar-animated-icon"
 import { ChartPieIcon } from "@icons/chart-pie-animated-icon"
@@ -12,15 +22,7 @@ import { PlusIcon } from "@icons/plus-animated-icon"
 import { SettingsIcon } from "@icons/settings-animated-icon"
 import { Button } from "@ui/button"
 import { ScrollArea } from "@ui/scroll-area"
-import {
-  HoverScale,
-  motion,
-  reveal,
-  revealLabel,
-  revealLift,
-  staggerItemSlideIn,
-  staggerParentDense,
-} from "@/components/animated"
+import { useLiveQuery } from "dexie-react-hooks"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRef, type ComponentType } from "react"
 import { AddNewTag } from "../settings/add-new-tag"
@@ -167,6 +169,8 @@ function SystemSection({ pathname }: { pathname: string }) {
 }
 
 function TagsSection({ activeTag }: { activeTag: string }) {
+  const tags = useLiveQuery(() => tagsService.getTags())
+
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
       <motion.h2
@@ -184,20 +188,27 @@ function TagsSection({ activeTag }: { activeTag: string }) {
           initial="hidden"
           animate="visible"
         >
-          {tagsNav.map((tag, i) => (
-            <SidebarNavItem
-              key={tag.href}
-              href={tag.href}
-              label={tag.label}
-              leading={
-                <span className={cn("size-3 shrink-0 rounded-full", tag.color)} aria-hidden />
-              }
-              isTag
-              isActive={activeTag === tag.label.toLowerCase()}
-              variants={staggerItemSlideIn}
-              custom={i}
-            />
-          ))}
+          <For
+            each={tags}
+            render={(tag) => (
+              <SidebarNavItem
+                key={tag.id}
+                href={`?tag=${tag.label}`}
+                label={tag.label}
+                leading={
+                  <span
+                    className={"size-3 shrink-0 rounded-full"}
+                    style={{ background: tag.color }}
+                    aria-hidden
+                  />
+                }
+                isTag
+                isActive={activeTag === tag.label.toLowerCase()}
+                variants={staggerItemSlideIn}
+                custom={tag.id}
+              />
+            )}
+          />
         </motion.ul>
         <AddNewTag>
           <Button className="border-dashed mt-2 w-full" variant="outline">

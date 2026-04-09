@@ -18,9 +18,9 @@ import { PaintBucket } from "lucide-react"
 import { ReactNode, useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { z } from "zod"
+import { tagsService } from "@/services/codo/codo-tags-service"
 
-// Match System Accent palette from settings page
-const COLOR_PRESETS = [
+const COLOR_PRESETS: readonly `#${string}`[] = [
   "#8b5cf6",
   "#22c55e",
   "#eab308",
@@ -28,10 +28,10 @@ const COLOR_PRESETS = [
   "#0ea5e9",
   "#3b82f6",
   "#ef4444",
-] as const
+]
 
 const addTagSchema = z.object({
-  name: z.string().min(1, "Name is required").max(32, "Max 32 characters"),
+  label: z.string().min(1, "Name is required").max(32, "Max 32 characters"),
   color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Pick a color"),
 })
 
@@ -44,7 +44,7 @@ export function AddNewTag({ children }: { children: ReactNode }) {
   const form = useForm<AddTagFormValues>({
     resolver: zodResolver(addTagSchema),
     defaultValues: {
-      name: "",
+      label: "",
       color: DEFAULT_COLOR,
     },
   })
@@ -55,9 +55,9 @@ export function AddNewTag({ children }: { children: ReactNode }) {
     defaultValue: DEFAULT_COLOR,
   })
 
-  const onSubmit = (data: AddTagFormValues) => {
-    // TODO: persist tag (e.g. API or local state)
-    console.log("Add tag", data)
+  const onSubmit = async (data: AddTagFormValues) => {
+    await tagsService.addTag({ ...data, label: data.label.toLowerCase() })
+
     form.reset()
     setOpen(false)
   }
@@ -74,17 +74,17 @@ export function AddNewTag({ children }: { children: ReactNode }) {
         </DialogHeader>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <FieldGroup>
-            <Field data-invalid={!!form.formState.errors.name}>
+            <Field data-invalid={!!form.formState.errors.label}>
               <FieldLabel htmlFor="tag-name">Name</FieldLabel>
               <Input
                 id="tag-name"
                 placeholder="e.g. Work, Personal"
                 autoFocus
-                aria-invalid={!!form.formState.errors.name}
-                {...form.register("name")}
+                aria-invalid={!!form.formState.errors.label}
+                {...form.register("label")}
               />
               <FieldError
-                errors={form.formState.errors.name ? [form.formState.errors.name] : undefined}
+                errors={form.formState.errors.label ? [form.formState.errors.label] : undefined}
               />
             </Field>
 
