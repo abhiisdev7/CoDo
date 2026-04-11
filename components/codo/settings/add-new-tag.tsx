@@ -19,6 +19,7 @@ import { ReactNode, useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { z } from "zod"
 import { tagsService } from "@/services/codo/codo-tags-service"
+import { toast } from "react-hot-toast"
 
 const COLOR_PRESETS: readonly `#${string}`[] = [
   "#8b5cf6",
@@ -56,10 +57,16 @@ export function AddNewTag({ children }: { children: ReactNode }) {
   })
 
   const onSubmit = async (data: AddTagFormValues) => {
-    await tagsService.addTag({ ...data, label: data.label.toLowerCase() })
+    try {
+      await tagsService.addTag({ ...data, label: data.label.toLowerCase() })
 
-    form.reset()
-    setOpen(false)
+      form.reset()
+      setOpen(false)
+      toast.success("Tag created successfully.")
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to create tag. Please try again.")
+    }
   }
 
   return (

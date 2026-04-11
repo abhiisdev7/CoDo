@@ -8,14 +8,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/c
 import { useLiveQuery } from "dexie-react-hooks"
 import { X } from "lucide-react"
 import { AddNewTag } from "./add-new-tag"
+import { toast } from "react-hot-toast"
 
 export function SettingsTagManagement() {
   const tags = useLiveQuery(() => tagsService.getTags(), [])
 
   if (!tags) return <></>
 
-  function handleDeleteTag(id: number) {
-    tagsService.deleteTag(id)
+  async function handleDeleteTag(id: number) {
+    try {
+      await tagsService.deleteTag(id)
+      toast.success("Tag deleted successfully.")
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to delete tag. Please try again.")
+    }
   }
 
   return (

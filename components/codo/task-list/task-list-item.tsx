@@ -8,7 +8,7 @@ import { CircularCheckbox } from "@ui/circular-checkbox"
 
 export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
   return (
-    <Item className="bg-background shadow-sm rounded-xl">
+    <Item className="shadow-sm rounded-xl bg-card">
       <div className="flex gap-2 items-center">
         {sortEnabled && <GripVertical className="text-muted-foreground cursor-grab" />}
         <CircularCheckbox />

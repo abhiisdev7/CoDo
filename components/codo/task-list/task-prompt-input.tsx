@@ -47,10 +47,10 @@ export function TaskPromptInput() {
   return (
     <Popover open={panel !== null} onOpenChange={() => setPanel(null)}>
       <PopoverAnchor asChild>
-        <div className="rounded-xl bg-background space-y-2 shadow-sm relative mb-8">
+        <div className="rounded-xl bg-card space-y-2 shadow-sm relative mb-8 border">
           <div className="flex gap-2 p-2 pb-0">
             <Textarea
-              className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 bg-background!"
+              className="resize-none border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 bg-card!"
               placeholder="Type task... (e.g. 'Pay bills @tomorrow !high #personal *daily')"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}

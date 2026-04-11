@@ -4,6 +4,7 @@ import "@/css/globals.css"
 import { ThemeProvider } from "@/components/context/theme-provider"
 import { fontSans } from "@/lib/fonts"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "react-hot-toast"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -20,7 +21,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            {children}
+            <Toaster position="top-right" />
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
