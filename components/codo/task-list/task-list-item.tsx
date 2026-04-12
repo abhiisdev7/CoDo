@@ -1,10 +1,9 @@
+import { DeleteIcon } from "@icons/delete-animated-icon"
 import { Badge } from "@ui/badge"
 import { Button } from "@ui/button"
+import { CircularCheckbox } from "@ui/circular-checkbox"
 import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@ui/item"
 import { Calendar, GripVertical, ListTree } from "lucide-react"
-import { DeleteIcon } from "@icons/delete-animated-icon"
-import { SquarePenIcon } from "@icons/square-pen-animated-icon"
-import { CircularCheckbox } from "@ui/circular-checkbox"
 import { TaskEditModel } from "./task-edit-model"
 
 export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
