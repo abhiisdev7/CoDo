@@ -5,6 +5,7 @@ import { Calendar, GripVertical, ListTree } from "lucide-react"
 import { DeleteIcon } from "@icons/delete-animated-icon"
 import { SquarePenIcon } from "@icons/square-pen-animated-icon"
 import { CircularCheckbox } from "@ui/circular-checkbox"
+import { TaskEditModel } from "./task-edit-model"
 
 export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
   return (
@@ -42,9 +43,7 @@ export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
         </ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button variant="secondary" size="icon-sm">
-          <SquarePenIcon />
-        </Button>
+        <TaskEditModel />
         <Button variant="destructive" size="icon-sm">
           <DeleteIcon />
         </Button>
