@@ -1,3 +1,4 @@
+import { DeleteAction } from "./codo-constants"
 import { codoDB, type CodoDb, type Tag } from "./codo-db"
 
 /** Default tags for new databases; each migration should stay idempotent where possible. */
@@ -22,7 +23,8 @@ class TagsService {
     const existing = await this.tags.where({ label }).first()
 
     if (existing) {
-      if (existing.deleted) await this.tags.update(existing.id, { deleted: 0, color })
+      if (existing.deleted)
+        await this.tags.update(existing.id, { deleted: DeleteAction.NotDeleted, color })
       return existing.id
     }
 
@@ -31,7 +33,7 @@ class TagsService {
 
   async getTags({ includeDeleted = false }: { includeDeleted?: boolean } = {}): Promise<Tag[]> {
     if (includeDeleted) return await this.tags.toArray()
-    return await this.tags.where({ deleted: 0 }).toArray()
+    return await this.tags.where({ deleted: DeleteAction.NotDeleted }).toArray()
   }
 
   async getTagById(id: number, { includeDeleted = false } = {}): Promise<Tag | null> {
@@ -48,7 +50,7 @@ class TagsService {
   }
 
   async deleteTag(id: number) {
-    return await this.tags.update(id, { deleted: 1 })
+    return await this.tags.update(id, { deleted: DeleteAction.Deleted })
   }
 
   /**

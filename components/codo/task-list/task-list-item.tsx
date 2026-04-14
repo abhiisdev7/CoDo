@@ -5,10 +5,21 @@ import { CircularCheckbox } from "@ui/circular-checkbox"
 import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@ui/item"
 import { Calendar, GripVertical, ListTree } from "lucide-react"
 import { TaskEditModel } from "./task-edit-model"
+import { useSortable } from "@dnd-kit/react/sortable"
 
-export function TaskListItem({ sortEnabled }: { sortEnabled?: boolean }) {
+export function TaskListItem({
+  sortEnabled,
+  id,
+  index,
+}: {
+  sortEnabled?: boolean
+  id: number
+  index: number
+}) {
+  const { ref } = useSortable({ id, index })
+
   return (
-    <Item className="shadow-sm rounded-xl bg-card">
+    <Item className="shadow-sm rounded-xl bg-card" ref={ref}>
       <div className="flex gap-2 items-center">
         {sortEnabled && <GripVertical className="text-muted-foreground cursor-grab" />}
         <CircularCheckbox />

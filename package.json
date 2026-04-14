@@ -12,6 +12,7 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
+    "@dnd-kit/react": "^0.4.0",
     "@hookform/resolvers": "^5.2.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
