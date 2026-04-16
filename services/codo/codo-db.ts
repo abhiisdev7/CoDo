@@ -20,10 +20,10 @@ interface Task {
   title: string
   description?: string
   status: TaskCompletionStatus
-  dueDate?: string
-  priority?: TaskPriority
+  dueDate: string
+  priority: TaskPriority
   sortIndex: number
-  recurrence?: TaskRecurrence
+  recurrence: TaskRecurrence
   deleted?: DeleteAction
   createdAt: string
   updatedAt: string

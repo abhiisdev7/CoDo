@@ -2,13 +2,14 @@ import { DeleteAction, TaskCompletionStatus, TaskRecurrence } from "./codo-const
 import { codoDB, type CodoDb, type SubTask, type Tag, type Task } from "./codo-db"
 import { tagsService } from "./codo-tags-service"
 
-export type NewTaskInput = Pick<Task, "title"> &
-  Partial<Omit<Task, "id" | "title" | "createdAt" | "updatedAt">>
+export type NewTaskInput = Pick<Task, "title" | "dueDate" | "priority"> &
+  Partial<Omit<Task, "id" | "title" | "dueDate" | "priority" | "createdAt" | "updatedAt">>
 
 export type NewSubTaskInput = Pick<SubTask, "title"> &
   Partial<Omit<SubTask, "id" | "taskId" | "title">>
 
 export type TaskWithResolvedTags = Task & { tags: Tag[] }
+export type TaskWithAllResolved = TaskWithResolvedTags & { subTasks: SubTask[] }
 
 class TasksService {
   private readonly db: CodoDb
@@ -78,13 +79,14 @@ class TasksService {
     return id
   }
 
-  async getActiveTasks(): Promise<Task[]> {
+  async getActiveTasks(): Promise<TaskWithAllResolved[]> {
     const rows = await this.tasks.where("deleted").equals(DeleteAction.NotDeleted).toArray()
     rows.sort((a, b) => a.sortIndex - b.sortIndex)
     return await Promise.all(
       rows.map(async (row) => ({
         ...row,
         tags: await this.pickTagsByIds(row.tagIds),
+        subTasks: await this.getSubTasksByTaskId(row.id!),
       })),
     )
   }
@@ -100,13 +102,15 @@ class TasksService {
     )
   }
 
-  async getAllTasks(): Promise<Task[]> {
+  async getAllTasks(): Promise<TaskWithAllResolved[]> {
     const rows = await this.tasks.toArray()
     rows.sort((a, b) => a.sortIndex - b.sortIndex)
+
     return await Promise.all(
       rows.map(async (row) => ({
         ...row,
         tags: await this.pickTagsByIds(row.tagIds),
+        subTasks: await this.getSubTasksByTaskId(row.id!),
       })),
     )
   }
